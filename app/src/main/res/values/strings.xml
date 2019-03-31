@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SoulsBorne Boss Ranker</string>
+    <string name="welcome">Rank your favourite boss fights from Dark Souls and Bloodborne!</string>
+    <string name="start_button">START</string>
+    <string name="title_activity_main">Vote</string>
+    <string name="title_activity_start">About</string>
+    <string name="title_activity_ranking">Rankings</string>
+    <string name="boss_name">Dragon Slayer Ornstein and Executioner Smough</string>
+    <string name="boss_name2">Lorian, Elder Prince and Lothric, Younger Prince</string>
+    <string name="title_vote">Vote</string>
+    <string name="title_about">About</string>
+    <string name="title_rankings">Rankings</string>
+    <string name="about">Vote based off how much you enjoyed a fight. NOT how hard you thought it was.</string>
+    <string name="ranking_title">Rankings</string>
+    <string name="elo_value">1920</string>
+    <string name="ranking_key">Rank     Boss     ELO</string>
+</resources>
