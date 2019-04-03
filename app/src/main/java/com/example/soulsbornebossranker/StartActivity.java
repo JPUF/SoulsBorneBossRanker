@@ -10,10 +10,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
 
     BottomNavigationView navigation;
+    TextView realtimeTextView;
+    Button setButton;
+
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mConditionRef = rootRef.child("condition");
+    DatabaseReference mBossesRef = rootRef.child("bosses");
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,6 +62,10 @@ public class StartActivity extends AppCompatActivity {
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(0).setChecked(true);
+
+        realtimeTextView = (TextView) findViewById(R.id.database_tv);
+        setButton = (Button) findViewById(R.id.button);
+
     }
 
     public void startMain() {
@@ -53,5 +76,38 @@ public class StartActivity extends AppCompatActivity {
     public void startRanking() {
         Intent intent = new Intent(this, RankingActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mConditionRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String text = dataSnapshot.getValue(String.class);
+                realtimeTextView.setText(text);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        setButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = new Date();
+                String dateS = dateFormat.format(date);
+                mConditionRef.setValue(dateS);
+
+                Map<String, String> bosses = new HashMap<>();
+                bosses.put("1", "Ornstein");
+                bosses.put("2", "Twin Princes");
+                mBossesRef.setValue(bosses);
+            }
+        });
     }
 }
