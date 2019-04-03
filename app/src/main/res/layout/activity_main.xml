@@ -8,117 +8,135 @@
     android:background="@android:color/darker_gray"
     tools:context=".MainActivity">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/bossCard1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        app:cardBackgroundColor="@android:color/background_dark"
-        app:cardElevation="10dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="64dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/outer_ll1"
+        <android.support.v7.widget.CardView
+            android:id="@+id/bossCard1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/bossImage1"
-                android:layout_width="match_parent"
-                android:layout_height="195dp"
-                android:cropToPadding="false"
-                app:srcCompat="@drawable/ons" />
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_weight="0.5"
+            app:cardBackgroundColor="@android:color/background_dark"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/inner_ll1"
+                android:id="@+id/outer_ll1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/background_dark"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/gameLogo1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.15"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/ds1" />
+                    android:id="@+id/bossImage1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.75"
+                    android:cropToPadding="false"
+                    app:srcCompat="@drawable/ons" />
 
-                <TextView
-                    android:id="@+id/bossName_tv1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:maxLines="2"
-                    android:paddingLeft="5dp"
-                    android:text="@string/boss_name"
-                    android:textAlignment="textStart"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:id="@+id/inner_ll1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.21"
+                    android:background="@android:color/background_dark"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/gameLogo1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/ds1" />
+
+                    <TextView
+                        android:id="@+id/bossName_tv1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:maxLines="2"
+                        android:paddingLeft="5dp"
+                        android:text="@string/boss_name"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/bossCard2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        app:cardBackgroundColor="@android:color/background_dark"
-        app:cardElevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bossCard1">
-
-        <LinearLayout
-            android:id="@+id/outer_ll2"
+        <android.support.v7.widget.CardView
+            android:id="@+id/bossCard2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/bossImage2"
-                android:layout_width="match_parent"
-                android:layout_height="195dp"
-                android:cropToPadding="false"
-                app:srcCompat="@drawable/twinprinces" />
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_weight="0.5"
+            app:cardBackgroundColor="@android:color/background_dark"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bossCard1">
 
             <LinearLayout
-                android:id="@+id/inner_ll2"
+                android:id="@+id/outer_ll2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/background_dark"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/gameLogo2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.15"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/ds3" />
+                    android:id="@+id/bossImage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.75"
+                    android:cropToPadding="false"
+                    app:srcCompat="@drawable/twinprinces" />
 
-                <TextView
-                    android:id="@+id/bossName_tv2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:maxLines="2"
-                    android:paddingLeft="5dp"
-                    android:text="@string/boss_name2"
-                    android:textAlignment="textStart"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:id="@+id/inner_ll2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.21"
+                    android:background="@android:color/background_dark"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/gameLogo2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/ds3" />
+
+                    <TextView
+                        android:id="@+id/bossName_tv2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:maxLines="2"
+                        android:paddingLeft="5dp"
+                        android:text="@string/boss_name2"
+                        android:textAlignment="textStart"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
