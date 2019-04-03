@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "960945308118",
+    "firebase_url": "https://soulsborne-boss-ranker.firebaseio.com",
+    "project_id": "soulsborne-boss-ranker",
+    "storage_bucket": "soulsborne-boss-ranker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960945308118:android:b342f1183d39fec5",
+        "android_client_info": {
+          "package_name": "com.example.soulsbornebossranker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960945308118-85ueup12ullohr746afkdsc4ec1i8j2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.soulsbornebossranker",
+            "certificate_hash": "2fc85ce69bf7514c12e1d0afaf1b12ec4b206769"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAvsqgZoMZrl78pS7odGEArjRSSRqSYnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960945308118-l1g2m2g3ebds5s6o0nqkonr21uqccpup.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
