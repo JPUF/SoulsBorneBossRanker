@@ -45,7 +45,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.75"
                     android:cropToPadding="false"
-                    app:srcCompat="@drawable/ons" />
+                    app:srcCompat="@drawable/bellgargoyle" />
 
                 <LinearLayout
                     android:id="@+id/inner_ll1"
@@ -104,7 +104,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.75"
                     android:cropToPadding="false"
-                    app:srcCompat="@drawable/twinprinces" />
+                    app:srcCompat="@drawable/caprademon" />
 
                 <LinearLayout
                     android:id="@+id/inner_ll2"
