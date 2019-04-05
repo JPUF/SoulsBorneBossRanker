@@ -1,22 +1,29 @@
 package com.example.soulsbornebossranker;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,10 +36,14 @@ public class StartActivity extends AppCompatActivity {
     BottomNavigationView navigation;
     TextView realtimeTextView;
     Button setButton;
+    ImageView testImage;
 
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mConditionRef = rootRef.child("condition");
     DatabaseReference mBossesRef = rootRef.child("bosses");
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -65,6 +76,7 @@ public class StartActivity extends AppCompatActivity {
 
         realtimeTextView = (TextView) findViewById(R.id.database_tv);
         setButton = (Button) findViewById(R.id.button);
+        testImage = (ImageView) findViewById(R.id.test_iv);
 
     }
 
@@ -103,10 +115,19 @@ public class StartActivity extends AppCompatActivity {
                 String dateS = dateFormat.format(date);
                 mConditionRef.setValue(dateS);
 
+                /*
                 Map<String, String> bosses = new HashMap<>();
                 bosses.put("1", "Ornstein");
                 bosses.put("2", "Twin Princes");
                 mBossesRef.setValue(bosses);
+                */
+
+                storageRef.child("boss_images/bellgargoyle.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(testImage);//TODO shouldn't this be on the UI thread or smth?
+                    }
+                });
             }
         });
     }
