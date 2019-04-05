@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.resources.TextAppearance;
@@ -18,7 +19,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
 public class VoteActivity extends AppCompatActivity {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
     BottomNavigationView navigation;
     LinearLayout card_layout;
@@ -52,11 +61,11 @@ public class VoteActivity extends AppCompatActivity {
         navigation.getMenu().getItem(1).setChecked(true);
 
         card_layout = (LinearLayout) findViewById(R.id.card_layout);
-        card_layout.addView(createBossCard("Dragonslayer Ornstein and Executioner Smough", R.drawable.ons, R.drawable.ds1));
-        card_layout.addView(createBossCard("Centipede Demon", R.drawable.centipededemon, R.drawable.ds1));
+        card_layout.addView(createBossCard("Dragonslayer Ornstein and Executioner Smough", "ons.jpg", R.drawable.ds1));
+        card_layout.addView(createBossCard("Bell Gargoyle", "bellgargoyle.jpg", R.drawable.ds1));
     }
 
-    private CardView createBossCard(String bossName, int bossImgID, int gameImgID) {
+    private CardView createBossCard(String bossName, String bossImageURL, int gameImgID) {//TODO refactor this as a subclass of CardView
         Context context = getApplicationContext();
 
         CardView cv = new CardView(context);
@@ -66,18 +75,24 @@ public class VoteActivity extends AppCompatActivity {
         cardParams.setMargins(0,16,0,0);
         cv.setLayoutParams(cardParams);
         cv.setCardElevation(10);
-        cv.setBackgroundColor(Color.BLACK);
+        cv.setBackgroundColor(Color.GRAY);
 
         LinearLayout outer_ll = new LinearLayout(context);
         LinearLayout.LayoutParams outerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         outer_ll.setOrientation(LinearLayout.VERTICAL);
         outer_ll.setLayoutParams(outerParams);
 
-        ImageView boss_image = new ImageView(context);
+        final ImageView boss_image = new ImageView(context);
         LinearLayout.LayoutParams bossImgParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.75f);
         boss_image.setLayoutParams(bossImgParams);
         boss_image.setCropToPadding(false);
-        boss_image.setImageResource(bossImgID);
+        //boss_image.setImageResource(bossImgID);
+        storageRef.child("boss_images/" + bossImageURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(boss_image);
+            }
+        });
 
         LinearLayout inner_ll = new LinearLayout(context);
         LinearLayout.LayoutParams innerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.17f);
