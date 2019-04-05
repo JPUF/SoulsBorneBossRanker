@@ -125,7 +125,7 @@ public class StartActivity extends AppCompatActivity {
                 storageRef.child("boss_images/bellgargoyle.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(testImage);//TODO shouldn't this be on the UI thread or smth?
+                        Picasso.get().load(uri).into(testImage);
                     }
                 });
             }
