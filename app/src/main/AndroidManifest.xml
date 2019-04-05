@@ -19,7 +19,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".VoteActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />

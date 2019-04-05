@@ -58,7 +58,7 @@ public class RankingActivity extends AppCompatActivity {
     }
 
     public void startMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, VoteActivity.class);
         startActivity(intent);
     }
 

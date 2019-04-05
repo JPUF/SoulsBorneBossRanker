@@ -6,12 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,8 +25,6 @@ import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -55,7 +50,7 @@ public class StartActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_vote:
-                    startMain();
+                    startVote();
                     return true;
                 case R.id.navigation_rankings:
                     startRanking();
@@ -80,8 +75,8 @@ public class StartActivity extends AppCompatActivity {
 
     }
 
-    public void startMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+    public void startVote() {
+        Intent intent = new Intent(this, VoteActivity.class);
         startActivity(intent);
     }
 
