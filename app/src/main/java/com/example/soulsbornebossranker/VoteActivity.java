@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ public class VoteActivity extends AppCompatActivity {
 
     BottomNavigationView navigation;
     LinearLayout card_layout;
+    ImageView bossImage1;
+    ImageView bossImage2;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -60,18 +63,30 @@ public class VoteActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(1).setChecked(true);
 
+        bossImage1 = new ImageView(getApplicationContext());
+        bossImage2 = new ImageView(getApplicationContext());
+
         card_layout = (LinearLayout) findViewById(R.id.card_layout);
-        card_layout.addView(createBossCard("Dragonslayer Ornstein and Executioner Smough", "ons.jpg", R.drawable.ds1));
-        card_layout.addView(createBossCard("Bell Gargoyle", "bellgargoyle.jpg", R.drawable.ds1));
+        card_layout.addView(createBossCard("Dragonslayer Ornstein and Executioner Smough", "ons.jpg", R.drawable.ds1, 1));
+        card_layout.addView(createSkipButton());
+        card_layout.addView(createBossCard("Bell Gargoyle", "bellgargoyle.jpg", R.drawable.ds1, 2));
+
+        storageRef.child("boss_images/caprademon.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(bossImage1);
+            }
+        });
+        bossImage1.setImageResource(R.drawable.centipededemon);
     }
 
-    private CardView createBossCard(String bossName, String bossImageURL, int gameImgID) {//TODO refactor this as a subclass of CardView
+    private CardView createBossCard(String bossName, String bossImageURL, int gameImgID, int cardNumber) {//TODO refactor this as a subclass of CardView
         Context context = getApplicationContext();
 
         CardView cv = new CardView(context);
         LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.5f);
-        cardParams.setMarginStart(64);
-        cardParams.setMarginEnd(64);
+        cardParams.setMarginStart(96);
+        cardParams.setMarginEnd(96);
         cardParams.setMargins(0,16,0,0);
         cv.setLayoutParams(cardParams);
         cv.setCardElevation(10);
@@ -82,11 +97,10 @@ public class VoteActivity extends AppCompatActivity {
         outer_ll.setOrientation(LinearLayout.VERTICAL);
         outer_ll.setLayoutParams(outerParams);
 
-        final ImageView boss_image = new ImageView(context);
+        final ImageView boss_image = (cardNumber == 1) ? bossImage1 : bossImage2;
         LinearLayout.LayoutParams bossImgParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.75f);
         boss_image.setLayoutParams(bossImgParams);
         boss_image.setCropToPadding(false);
-        //boss_image.setImageResource(bossImgID);
         storageRef.child("boss_images/" + bossImageURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -95,7 +109,7 @@ public class VoteActivity extends AppCompatActivity {
         });
 
         LinearLayout inner_ll = new LinearLayout(context);
-        LinearLayout.LayoutParams innerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.17f);
+        LinearLayout.LayoutParams innerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.2f);
         inner_ll.setOrientation(LinearLayout.HORIZONTAL);
         inner_ll.setLayoutParams(innerParams);
         inner_ll.setBackgroundColor(Color.BLACK);
@@ -119,11 +133,22 @@ public class VoteActivity extends AppCompatActivity {
 
         inner_ll.addView(game_image);
         inner_ll.addView(name_tv);
-        outer_ll.addView(boss_image);
-        outer_ll.addView(inner_ll);
+        outer_ll.addView((cardNumber == 1) ? boss_image : inner_ll);
+        outer_ll.addView((cardNumber == 2) ? boss_image : inner_ll);
         cv.addView(outer_ll);
 
         return cv;
+    }
+
+    private Button createSkipButton() {
+        Button b = new Button(getApplicationContext());
+        LinearLayout.LayoutParams bParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0, 0.1f);
+        bParams.setMargins(0, 8,0,8);
+        bParams.setMarginStart(16);
+        bParams.setMarginEnd(16);
+        b.setLayoutParams(bParams);
+        b.setText("SKIP");
+        return b;
     }
 
     public void startAbout() {
