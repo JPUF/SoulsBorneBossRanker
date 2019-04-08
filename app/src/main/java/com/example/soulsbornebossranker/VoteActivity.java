@@ -32,6 +32,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class VoteActivity extends AppCompatActivity {
 
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
@@ -86,20 +88,19 @@ public class VoteActivity extends AppCompatActivity {
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setUpperCardToBoss(new Boss("Dragonslayer Ornstein and Executioner Smough", 6, "ds1", "ons.jpg"));
-                setLowerCardToBoss(new Boss("Twin Princes", 7, "ds3", "twinprinces.jpg"));
-                getRandomBoss();
+                setUpperCardToRandomBoss();
+                setLowerCardToRandomBoss();
             }
         });
     }
 
-    public Boss getRandomBoss() {
-        DatabaseReference bossRef = databaseRef.child("bosses/1/name");
+    public void setUpperCardToRandomBoss() {
+        int randomBossID = ThreadLocalRandom.current().nextInt(1, 7 + 1);
+        DatabaseReference bossRef = databaseRef.child("bosses/"+ randomBossID);
         bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                String n = snapshot.getValue(String.class);
-                Log.i("Boss", n);
+                setUpperCardToBoss(snapshot.getValue(Boss.class));
             }
 
             @Override
@@ -107,7 +108,22 @@ public class VoteActivity extends AppCompatActivity {
                 Log.e("Firebase", "loadBoss, cancelled",  databaseError.toException());
             }
         });
-        return new Boss("Twin Princes", 7, "ds3", "twinprinces.jpg");
+    }
+
+    public void setLowerCardToRandomBoss() {
+        int randomBossID = ThreadLocalRandom.current().nextInt(1, 7 + 1);
+        DatabaseReference bossRef = databaseRef.child("bosses/"+ randomBossID);
+        bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                setLowerCardToBoss(snapshot.getValue(Boss.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("Firebase", "loadBoss, cancelled",  databaseError.toException());
+            }
+        });
     }
 
     public void setUpperCardToBoss(Boss boss) {

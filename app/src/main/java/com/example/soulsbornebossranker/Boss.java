@@ -6,6 +6,7 @@ public class Boss {
     public String game;
     public String imagePath;
 
+    public Boss() {}
     public Boss(String name, int id, String game, String imagePath) {
         this.name = name;
         this.id = id;

@@ -44,7 +44,6 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.75"
                     android:adjustViewBounds="true"
-                    android:cropToPadding="false"
                     app:srcCompat="@drawable/bellgargoyle" />
 
                 <LinearLayout
@@ -58,7 +57,7 @@
                     <ImageView
                         android:id="@+id/gameImage1"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="0.15"
                         android:adjustViewBounds="true"
                         app:srcCompat="@drawable/ds1" />
@@ -115,7 +114,7 @@
                     <ImageView
                         android:id="@+id/gameImage2"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="0.15"
                         android:adjustViewBounds="true"
                         app:srcCompat="@drawable/ds1" />
