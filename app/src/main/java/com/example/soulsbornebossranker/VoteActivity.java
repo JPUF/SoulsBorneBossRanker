@@ -31,10 +31,12 @@ public class VoteActivity extends AppCompatActivity {
     StorageReference storageRef = storage.getReference();
 
     BottomNavigationView navigation;
-    LinearLayout card_layout;
-    ImageView bossImage1;
-    ImageView bossImage2;
     Button skipButton;
+
+    //Boss #1             Boss #2
+    ImageView bossImage1; ImageView bossImage2;
+    ImageView gameImage1; ImageView gameImage2;
+    TextView nameText1;   TextView nameText2;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,7 +48,6 @@ public class VoteActivity extends AppCompatActivity {
                     startAbout();
                     return true;
                 case R.id.navigation_vote:
-
                     return true;
                 case R.id.navigation_rankings:
                     startRanking();
@@ -56,6 +57,8 @@ public class VoteActivity extends AppCompatActivity {
         }
     };
 
+    //TODO skip button's functionality is very temporary. Now, read in a random boss from the database, and then set it using Upper/Lower.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,87 +66,60 @@ public class VoteActivity extends AppCompatActivity {
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(1).setChecked(true);
+        skipButton = findViewById(R.id.skipButton);
 
-        bossImage1 = new ImageView(getApplicationContext());
-        bossImage2 = new ImageView(getApplicationContext());
+        bossImage1 = findViewById(R.id.bossImage1); bossImage2 = findViewById(R.id.bossImage2);
+        gameImage1 = findViewById(R.id.gameImage1); gameImage2 = findViewById(R.id.gameImage2);
+        nameText1 = findViewById(R.id.nameText1); nameText2 = findViewById(R.id.nameText2);
 
-        //TODO rewrite so that boss cards (and skip button) are done in XML. Then pull the relevant Views into here for edits.
-        card_layout = (LinearLayout) findViewById(R.id.card_layout);
-        //card_layout.addView(createBossCard("Dragonslayer Ornstein and Executioner Smough", "ons.jpg", R.drawable.ds1, 1));
-        //card_layout.addView(createSkipButton());
-        //card_layout.addView(createBossCard("Bell Gargoyle", "bellgargoyle.jpg", R.drawable.ds1, 2));
-    }
+        setUpperCardToBoss(new Boss("Ceaseless Discharge", 2, "ds2", "ceaselessdischarge.jpg"));
+        setLowerCardToBoss(new Boss("Asylum Demon", 1, "ds1", "asylumdemon.jpg"));
 
-    private CardView createBossCard(String bossName, String bossImageURL, int gameImgID, int cardNumber) {//TODO refactor this as a subclass of CardView
-        Context context = getApplicationContext();
-
-        CardView cv = new CardView(context);
-        LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.5f);
-        cardParams.setMarginStart(96);
-        cardParams.setMarginEnd(96);
-        cardParams.setMargins(0,16,0,0);
-        cv.setLayoutParams(cardParams);
-        cv.setCardElevation(10);
-        cv.setBackgroundColor(Color.GRAY);
-
-        LinearLayout outer_ll = new LinearLayout(context);
-        LinearLayout.LayoutParams outerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        outer_ll.setOrientation(LinearLayout.VERTICAL);
-        outer_ll.setLayoutParams(outerParams);
-
-        final ImageView boss_image = (cardNumber == 1) ? bossImage1 : bossImage2;
-        LinearLayout.LayoutParams bossImgParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.75f);
-        boss_image.setLayoutParams(bossImgParams);
-        boss_image.setCropToPadding(false);
-        storageRef.child("boss_images/" + bossImageURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(boss_image);
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setUpperCardToBoss(new Boss("Dragonslayer Ornstein and Executioner Smough", 6, "ds1", "ons.jpg"));
+                setLowerCardToBoss(new Boss("Twin Princes", 7, "ds3", "twinprinces.jpg"));
             }
         });
 
-        LinearLayout inner_ll = new LinearLayout(context);
-        LinearLayout.LayoutParams innerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.2f);
-        inner_ll.setOrientation(LinearLayout.HORIZONTAL);
-        inner_ll.setLayoutParams(innerParams);
-        inner_ll.setBackgroundColor(Color.BLACK);
-
-        ImageView game_image = new ImageView(context);
-        LinearLayout.LayoutParams gameImgParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.15f);
-        game_image.setLayoutParams(gameImgParams);
-        game_image.setAdjustViewBounds(true);
-        game_image.setImageResource(gameImgID);
-
-        TextView name_tv = new TextView(context);
-        LinearLayout.LayoutParams nameParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
-        name_tv.setLayoutParams(nameParams);
-        name_tv.setMaxLines(2);
-        name_tv.setPadding(5,0,0,0);
-        name_tv.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-        name_tv.setTextColor(Color.WHITE);
-        name_tv.setTypeface(Typeface.DEFAULT_BOLD);
-        name_tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);//TODO text size not scaling properly. Currently optimised for 720p.
-        name_tv.setText(bossName);
-
-        inner_ll.addView(game_image);
-        inner_ll.addView(name_tv);
-        outer_ll.addView((cardNumber == 1) ? boss_image : inner_ll);
-        outer_ll.addView((cardNumber == 2) ? boss_image : inner_ll);
-        cv.addView(outer_ll);
-
-        return cv;
     }
 
-    private Button createSkipButton() {
-        Button b = new Button(getApplicationContext());
-        LinearLayout.LayoutParams bParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0, 0.1f);
-        bParams.setMargins(0, 8,0,8);
-        bParams.setMarginStart(16);
-        bParams.setMarginEnd(16);
-        b.setLayoutParams(bParams);
-        b.setText("SKIP");
-        b.setId(R.id.skipButton);
-        return b;
+    public void setUpperCardToBoss(Boss boss) {
+        nameText1.setText(boss.name);
+        if(boss.game.contains("ds1"))
+            gameImage1.setImageResource(R.drawable.ds1);
+        else if (boss.game.contains("ds2"))
+            gameImage1.setImageResource(R.drawable.ds2);
+        else if (boss.game.contains("ds3"))
+            gameImage1.setImageResource(R.drawable.ds3);
+        else if (boss.game.contains("bb"))
+            gameImage1.setImageResource(R.drawable.bb);
+
+        storageRef.child("boss_images/" + boss.imagePath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(bossImage1);
+            }
+        });
+    }
+
+    public void setLowerCardToBoss(Boss boss) {
+        nameText2.setText(boss.name);
+        if(boss.game.contains("ds1"))
+            gameImage2.setImageResource(R.drawable.ds1);
+        else if (boss.game.contains("ds2"))
+            gameImage2.setImageResource(R.drawable.ds2);
+        else if (boss.game.contains("ds3"))
+            gameImage2.setImageResource(R.drawable.ds3);
+        else if (boss.game.contains("bb"))
+            gameImage2.setImageResource(R.drawable.bb);
+
+        storageRef.child("boss_images/" + boss.imagePath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(bossImage2);
+            }
+        });
     }
 
     public void startAbout() {

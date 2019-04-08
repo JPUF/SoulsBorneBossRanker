@@ -25,6 +25,8 @@ import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -110,12 +112,17 @@ public class StartActivity extends AppCompatActivity {
                 String dateS = dateFormat.format(date);
                 mConditionRef.setValue(dateS);
 
-                /*
-                Map<String, String> bosses = new HashMap<>();
-                bosses.put("1", "Ornstein");
-                bosses.put("2", "Twin Princes");
+
+                Map<String, Boss> bosses = new HashMap<>();
+                bosses.put("1", new Boss("Asylum Demon", 1, "ds1", "asylumdemon.jpg"));
+                bosses.put("2", new Boss("Bell Gargoyle", 2, "ds1", "bellgargoyle.jpg"));
+                bosses.put("3", new Boss("Capra Demon", 3, "ds1", "caprademon.jpg"));
+                bosses.put("4", new Boss("Ceaseless Discharge", 4, "ds1", "ceaselessdischarge.jpg"));
+                bosses.put("5", new Boss("Centipede Demon", 5, "ds1", "centipededemon.jpg"));
+                bosses.put("6", new Boss("Ornstein and Smough", 6, "ds1", "ons.jpg"));
+                bosses.put("7", new Boss("Twin Princes", 7, "ds3", "twinprinces.jpg"));
                 mBossesRef.setValue(bosses);
-                */
+
 
                 storageRef.child("boss_images/bellgargoyle.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
