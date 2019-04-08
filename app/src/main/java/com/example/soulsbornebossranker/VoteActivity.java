@@ -34,6 +34,7 @@ public class VoteActivity extends AppCompatActivity {
     LinearLayout card_layout;
     ImageView bossImage1;
     ImageView bossImage2;
+    Button skipButton;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,18 +67,11 @@ public class VoteActivity extends AppCompatActivity {
         bossImage1 = new ImageView(getApplicationContext());
         bossImage2 = new ImageView(getApplicationContext());
 
+        //TODO rewrite so that boss cards (and skip button) are done in XML. Then pull the relevant Views into here for edits.
         card_layout = (LinearLayout) findViewById(R.id.card_layout);
-        card_layout.addView(createBossCard("Dragonslayer Ornstein and Executioner Smough", "ons.jpg", R.drawable.ds1, 1));
-        card_layout.addView(createSkipButton());
-        card_layout.addView(createBossCard("Bell Gargoyle", "bellgargoyle.jpg", R.drawable.ds1, 2));
-
-        storageRef.child("boss_images/caprademon.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(bossImage1);
-            }
-        });
-        bossImage1.setImageResource(R.drawable.centipededemon);
+        //card_layout.addView(createBossCard("Dragonslayer Ornstein and Executioner Smough", "ons.jpg", R.drawable.ds1, 1));
+        //card_layout.addView(createSkipButton());
+        //card_layout.addView(createBossCard("Bell Gargoyle", "bellgargoyle.jpg", R.drawable.ds1, 2));
     }
 
     private CardView createBossCard(String bossName, String bossImageURL, int gameImgID, int cardNumber) {//TODO refactor this as a subclass of CardView
@@ -148,6 +142,7 @@ public class VoteActivity extends AppCompatActivity {
         bParams.setMarginEnd(16);
         b.setLayoutParams(bParams);
         b.setText("SKIP");
+        b.setId(R.id.skipButton);
         return b;
     }
 
