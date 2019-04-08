@@ -11,6 +11,7 @@ import android.support.design.resources.TextAppearance;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,14 +22,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class VoteActivity extends AppCompatActivity {
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference();
+    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+
+
 
     BottomNavigationView navigation;
     Button skipButton;
@@ -79,9 +88,26 @@ public class VoteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setUpperCardToBoss(new Boss("Dragonslayer Ornstein and Executioner Smough", 6, "ds1", "ons.jpg"));
                 setLowerCardToBoss(new Boss("Twin Princes", 7, "ds3", "twinprinces.jpg"));
+                getRandomBoss();
             }
         });
+    }
 
+    public Boss getRandomBoss() {
+        DatabaseReference bossRef = databaseRef.child("bosses/1/name");
+        bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                String n = snapshot.getValue(String.class);
+                Log.i("Boss", n);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("Firebase", "loadBoss, cancelled",  databaseError.toException());
+            }
+        });
+        return new Boss("Twin Princes", 7, "ds3", "twinprinces.jpg");
     }
 
     public void setUpperCardToBoss(Boss boss) {
