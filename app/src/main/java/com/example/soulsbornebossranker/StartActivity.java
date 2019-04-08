@@ -112,7 +112,14 @@ public class StartActivity extends AppCompatActivity {
                 String dateS = dateFormat.format(date);
                 mConditionRef.setValue(dateS);
 
+                storageRef.child("boss_images/bellgargoyle.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(testImage);
+                    }
+                });
 
+                /*
                 Map<String, Boss> bosses = new HashMap<>();
                 bosses.put("1", new Boss("Asylum Demon", 1, "ds1", "asylumdemon.jpg"));
                 bosses.put("2", new Boss("Bell Gargoyle", 2, "ds1", "bellgargoyle.jpg"));
@@ -126,13 +133,8 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put("10", new Boss("Dragonslayer Ornstein and Executioner Smough", 10, "ds1", "ons.jpg"));
                 bosses.put("11", new Boss("Twin Princes", 11, "ds3", "twinprinces.jpg"));
                 mBossesRef.setValue(bosses);
+                */
 
-                storageRef.child("boss_images/bellgargoyle.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(testImage);
-                    }
-                });
             }
         });
     }
