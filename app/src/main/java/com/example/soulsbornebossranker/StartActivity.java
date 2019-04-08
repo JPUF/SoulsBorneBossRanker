@@ -119,10 +119,13 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put("3", new Boss("Capra Demon", 3, "ds1", "caprademon.jpg"));
                 bosses.put("4", new Boss("Ceaseless Discharge", 4, "ds1", "ceaselessdischarge.jpg"));
                 bosses.put("5", new Boss("Centipede Demon", 5, "ds1", "centipededemon.jpg"));
-                bosses.put("6", new Boss("Ornstein and Smough", 6, "ds1", "ons.jpg"));
-                bosses.put("7", new Boss("Twin Princes", 7, "ds3", "twinprinces.jpg"));
+                bosses.put("6", new Boss("Chaos Witch Quelaag", 6, "ds1", "quelaag.jpg"));
+                bosses.put("7", new Boss("Crossbreed Priscilla", 7, "ds1", "priscilla.jpg"));
+                bosses.put("8", new Boss("Dark Sun Gwyndolin", 8, "ds1", "gwyndolin.jpg"));
+                bosses.put("9", new Boss("Demon Firesage", 9, "ds1", "demonfiresage.jpg"));
+                bosses.put("10", new Boss("Dragonslayer Ornstein and Executioner Smough", 10, "ds1", "ons.jpg"));
+                bosses.put("11", new Boss("Twin Princes", 11, "ds3", "twinprinces.jpg"));
                 mBossesRef.setValue(bosses);
-
 
                 storageRef.child("boss_images/bellgargoyle.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
@@ -134,3 +137,4 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 }
+

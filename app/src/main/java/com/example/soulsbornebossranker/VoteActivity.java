@@ -83,8 +83,8 @@ public class VoteActivity extends AppCompatActivity {
         gameImage1 = findViewById(R.id.gameImage1); gameImage2 = findViewById(R.id.gameImage2);
         nameText1 = findViewById(R.id.nameText1); nameText2 = findViewById(R.id.nameText2);
 
-        setUpperCardToBoss(new Boss("Ceaseless Discharge", 2, "ds2", "ceaselessdischarge.jpg"));
-        setLowerCardToBoss(new Boss("Asylum Demon", 1, "ds1", "asylumdemon.jpg"));
+        setUpperCardToRandomBoss();
+        setLowerCardToRandomBoss();
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -95,7 +95,7 @@ public class VoteActivity extends AppCompatActivity {
     }
 
     public void setUpperCardToRandomBoss() {
-        int randomBossID = ThreadLocalRandom.current().nextInt(1, 7 + 1);
+        int randomBossID = ThreadLocalRandom.current().nextInt(1, 11 + 1);
         DatabaseReference bossRef = databaseRef.child("bosses/"+ randomBossID);
         bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -111,7 +111,7 @@ public class VoteActivity extends AppCompatActivity {
     }
 
     public void setLowerCardToRandomBoss() {
-        int randomBossID = ThreadLocalRandom.current().nextInt(1, 7 + 1);
+        int randomBossID = ThreadLocalRandom.current().nextInt(1, 11 + 1);
         DatabaseReference bossRef = databaseRef.child("bosses/"+ randomBossID);
         bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
