@@ -33,6 +33,7 @@ public class VoteActivity extends AppCompatActivity {
     Button skipButton;
 
     //Boss #1             Boss #2
+    Boss upperBoss;       Boss lowerBoss;
     ImageView bossImage1; ImageView bossImage2;
     ImageView gameImage1; ImageView gameImage2;
     TextView nameText1;   TextView nameText2;
@@ -81,9 +82,24 @@ public class VoteActivity extends AppCompatActivity {
             }
         });
 
+        bossImage1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Contest.scoreResult(upperBoss, lowerBoss);
+                setCardsToRandomBosses();
+            }
+        });
+
+        bossImage2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Contest.scoreResult(lowerBoss, upperBoss);
+                setCardsToRandomBosses();
+            }
+        });
+
     }
 
     public void setUpperCardToBoss(Boss boss) {
+        upperBoss = boss;
         nameText1.setText(boss.name);
         if(boss.game.contains("ds1"))
             gameImage1.setImageResource(R.drawable.ds1);
@@ -103,6 +119,7 @@ public class VoteActivity extends AppCompatActivity {
     }
 
     public void setLowerCardToBoss(Boss boss) {
+        lowerBoss = boss;
         nameText2.setText(boss.name);
         if(boss.game.contains("ds1"))
             gameImage2.setImageResource(R.drawable.ds1);
