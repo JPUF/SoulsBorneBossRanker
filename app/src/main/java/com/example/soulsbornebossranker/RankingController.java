@@ -10,6 +10,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RankingController {
@@ -35,6 +37,12 @@ public class RankingController {
                 for(DataSnapshot bossSnapshot : dataSnapshot.getChildren()) {
                     bosses.add(bossSnapshot.getValue(Boss.class));
                 }
+                Collections.sort(bosses, new Comparator<Boss>() {
+                    @Override
+                    public int compare(Boss b1, Boss b2) {
+                        return b2.points - b1.points;
+                    }
+                });
                 dataStatus.DataIsLoaded(bosses);
             }
 

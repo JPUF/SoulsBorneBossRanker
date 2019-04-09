@@ -70,14 +70,15 @@ public class RankingActivity extends AppCompatActivity {
         rankingController.readAllBosses(new RankingController.DataStatus() {
             @Override
             public void DataIsLoaded(ArrayList<Boss> bosses) {
+                int rank = 1;
                 for(Boss boss : bosses) {
-                    ranking_layout.addView(createRow(boss));
+                    ranking_layout.addView(createRow(boss, rank++));
                 }
             }
         });
     }
 
-    public LinearLayout createRow(Boss boss) {
+    public LinearLayout createRow(Boss boss, Integer rank) {
         Context context = getApplicationContext();
 
         LinearLayout outer_ll = new LinearLayout(context);
@@ -87,9 +88,9 @@ public class RankingActivity extends AppCompatActivity {
         outer_ll.setBackgroundColor(Color.BLACK);
 
         TextView rank_tv = new TextView(context);
-        LinearLayout.LayoutParams rankParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.05f);
+        LinearLayout.LayoutParams rankParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.1f);
         rank_tv.setLayoutParams(rankParams);
-        rank_tv.setText("1");
+        rank_tv.setText(rank.toString());
         rank_tv.setTextColor(Color.WHITE);
         rank_tv.setTextSize(18);
         rank_tv.setTextAppearance(Typeface.BOLD);
@@ -112,6 +113,7 @@ public class RankingActivity extends AppCompatActivity {
         LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.11f);
         iv.setLayoutParams(ivParams);
         iv.setAdjustViewBounds(true);
+        iv.setScaleType(ImageView.ScaleType.FIT_XY);
         if(boss.game.contains("ds1"))
             iv.setImageResource(R.drawable.ds1);
         else if(boss.game.contains("ds2"))
