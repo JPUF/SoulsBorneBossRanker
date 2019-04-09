@@ -68,12 +68,14 @@ public class VoteActivity extends AppCompatActivity {
         }
     };
 
-    //TODO skip button's functionality is very temporary. Now, read in a random boss from the database, and then set it using Upper/Lower.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
+
+        //VoteController voteController = new VoteController();
+
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(1).setChecked(true);
@@ -83,6 +85,29 @@ public class VoteActivity extends AppCompatActivity {
         gameImage1 = findViewById(R.id.gameImage1); gameImage2 = findViewById(R.id.gameImage2);
         nameText1 = findViewById(R.id.nameText1); nameText2 = findViewById(R.id.nameText2);
 
+        new VoteController().getRandomBoss(new VoteController.DataStatus() {
+            @Override
+            public void DataIsLoaded(Boss upperBoss) {
+                setUpperCardToBoss(upperBoss);
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+
+        /*
         setUpperCardToRandomBoss();
         setLowerCardToRandomBoss();
 
@@ -92,6 +117,7 @@ public class VoteActivity extends AppCompatActivity {
                 setLowerCardToRandomBoss();
             }
         });
+        */
     }
 
     public void setUpperCardToRandomBoss() {
