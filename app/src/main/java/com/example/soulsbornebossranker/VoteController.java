@@ -11,15 +11,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class VoteController {
     private Boss boss;
-    private StorageReference storageRef;
     private DatabaseReference databaseRef;
+    private static int bossInUse = 0;
 
     public VoteController() {
-        storageRef = FirebaseStorage.getInstance().getReference();
         databaseRef = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -29,8 +30,13 @@ public class VoteController {
 
 
     public void readRandomBoss(final DataStatus dataStatus) {
-        int randomBossID = ThreadLocalRandom.current().nextInt(1, 11 + 1);
+        int randomBossID;
+        do {
+            randomBossID = ThreadLocalRandom.current().nextInt(0, 11) + 1;
+        } while(bossInUse == randomBossID);
+        bossInUse = randomBossID;
         DatabaseReference bossRef = databaseRef.child("bosses/" + randomBossID);
+        Log.i("ControllerBoss", "randomID: " + randomBossID);
 
         bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

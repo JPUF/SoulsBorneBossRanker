@@ -27,8 +27,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class VoteActivity extends AppCompatActivity {
 
-    //TODO disallow
-
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     VoteController voteController;
     BottomNavigationView navigation;
@@ -82,6 +80,7 @@ public class VoteActivity extends AppCompatActivity {
                 setCardsToRandomBosses();
             }
         });
+
     }
 
     public void setUpperCardToBoss(Boss boss) {
