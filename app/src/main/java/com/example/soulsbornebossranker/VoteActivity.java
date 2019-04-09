@@ -1,28 +1,19 @@
 package com.example.soulsbornebossranker;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.resources.TextAppearance;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,11 +27,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class VoteActivity extends AppCompatActivity {
 
+    //TODO disallow
+
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
-
-
-
+    VoteController voteController;
     BottomNavigationView navigation;
     Button skipButton;
 
@@ -74,7 +64,7 @@ public class VoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
-        //VoteController voteController = new VoteController();
+        voteController = new VoteController();
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -85,69 +75,11 @@ public class VoteActivity extends AppCompatActivity {
         gameImage1 = findViewById(R.id.gameImage1); gameImage2 = findViewById(R.id.gameImage2);
         nameText1 = findViewById(R.id.nameText1); nameText2 = findViewById(R.id.nameText2);
 
-        new VoteController().getRandomBoss(new VoteController.DataStatus() {
-            @Override
-            public void DataIsLoaded(Boss upperBoss) {
-                setUpperCardToBoss(upperBoss);
-            }
-
-            @Override
-            public void DataIsInserted() {
-
-            }
-
-            @Override
-            public void DataIsUpdated() {
-
-            }
-
-            @Override
-            public void DataIsDeleted() {
-
-            }
-        });
-
-        /*
-        setUpperCardToRandomBoss();
-        setLowerCardToRandomBoss();
+        setCardsToRandomBosses();
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setUpperCardToRandomBoss();
-                setLowerCardToRandomBoss();
-            }
-        });
-        */
-    }
-
-    public void setUpperCardToRandomBoss() {
-        int randomBossID = ThreadLocalRandom.current().nextInt(1, 11 + 1);
-        DatabaseReference bossRef = databaseRef.child("bosses/"+ randomBossID);
-        bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                setUpperCardToBoss(snapshot.getValue(Boss.class));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("Firebase", "loadBoss, cancelled",  databaseError.toException());
-            }
-        });
-    }
-
-    public void setLowerCardToRandomBoss() {
-        int randomBossID = ThreadLocalRandom.current().nextInt(1, 11 + 1);
-        DatabaseReference bossRef = databaseRef.child("bosses/"+ randomBossID);
-        bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                setLowerCardToBoss(snapshot.getValue(Boss.class));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("Firebase", "loadBoss, cancelled",  databaseError.toException());
+                setCardsToRandomBosses();
             }
         });
     }
@@ -190,6 +122,21 @@ public class VoteActivity extends AppCompatActivity {
         });
     }
 
+    private void setCardsToRandomBosses() {
+        voteController.readRandomBoss(new VoteController.DataStatus() {
+            @Override
+            public void DataIsLoaded(Boss boss) {
+                setUpperCardToBoss(boss);
+            }
+        });
+
+        voteController.readRandomBoss(new VoteController.DataStatus() {
+            @Override
+            public void DataIsLoaded(Boss boss) {
+                setLowerCardToBoss(boss);
+            }
+        });
+    }
     public void startAbout() {
         Intent intent = new Intent(this, StartActivity.class);
         startActivity(intent);

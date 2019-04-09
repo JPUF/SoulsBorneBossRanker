@@ -14,10 +14,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class VoteController {
-    private Boss upperBoss;
-    private Boss lowerBoss;
-    StorageReference storageRef;
-    DatabaseReference databaseRef;
+    private Boss boss;
+    private StorageReference storageRef;
+    private DatabaseReference databaseRef;
 
     public VoteController() {
         storageRef = FirebaseStorage.getInstance().getReference();
@@ -26,13 +25,10 @@ public class VoteController {
 
     public interface DataStatus{
         void DataIsLoaded(Boss upperBoss);
-        void DataIsInserted();
-        void DataIsUpdated();
-        void DataIsDeleted();
     }
 
 
-    public void getRandomBoss(final DataStatus dataStatus) {
+    public void readRandomBoss(final DataStatus dataStatus) {
         int randomBossID = ThreadLocalRandom.current().nextInt(1, 11 + 1);
         DatabaseReference bossRef = databaseRef.child("bosses/" + randomBossID);
 
@@ -41,8 +37,8 @@ public class VoteController {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boss b = dataSnapshot.getValue(Boss.class);
                 Log.i("ControllerBoss", "inner: " + b.name);
-                upperBoss = b;
-                dataStatus.DataIsLoaded(upperBoss);
+                boss = b;
+                dataStatus.DataIsLoaded(boss);
             }
 
             @Override
