@@ -144,6 +144,10 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put((id).toString(), new Boss("Manus, Father of the Abyss", id, "ds1", "manus.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Moonlight Butterfly", id, "ds1", "moonlightbutterfly.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Pinwheel", id, "ds1", "pinwheel.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Sanctuary Guardian", id, "ds1", "sanctuaryguardian.jpg", startScore));id++;//
+                bosses.put((id).toString(), new Boss("Seath the Scaleless", id, "ds1", "seath.jpg", startScore));id++;//
+                bosses.put((id).toString(), new Boss("Stray Demon", id, "ds1", "straydemon.jpg", startScore));id++;//
+                bosses.put((id).toString(), new Boss("Taurus Demon", id, "ds1", "taurusdemon.jpg", startScore));id++;//
 
                 bosses.put((id).toString(), new Boss("Twin Princes", id, "ds3", "twinprinces.jpg", startScore));id++;
                 mBossesRef.setValue(bosses);
@@ -153,4 +157,5 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 }
+
 
