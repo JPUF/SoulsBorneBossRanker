@@ -32,7 +32,7 @@ public class VoteController {
     public void readRandomBoss(final DataStatus dataStatus) {
         int randomBossID;
         do {
-            randomBossID = ThreadLocalRandom.current().nextInt(0, 19) + 1;//bound = # of bosses
+            randomBossID = ThreadLocalRandom.current().nextInt(0, 22) + 1;//bound = # of bosses -1
         } while(bossInUse == randomBossID);
         bossInUse = randomBossID;
         DatabaseReference bossRef = databaseRef.child("bosses/" + randomBossID);
