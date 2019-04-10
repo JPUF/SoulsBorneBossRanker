@@ -120,18 +120,32 @@ public class StartActivity extends AppCompatActivity {
                 });
 
                 int startScore = 1000;
+                Integer id = 1;
                 Map<String, Boss> bosses = new HashMap<>();
-                bosses.put("1", new Boss("Asylum Demon", 1, "ds1", "asylumdemon.jpg", startScore));
-                bosses.put("2", new Boss("Bell Gargoyle", 2, "ds1", "bellgargoyle.jpg", startScore));
-                bosses.put("3", new Boss("Capra Demon", 3, "ds1", "caprademon.jpg", startScore));
-                bosses.put("4", new Boss("Ceaseless Discharge", 4, "ds1", "ceaselessdischarge.jpg", startScore));
-                bosses.put("5", new Boss("Centipede Demon", 5, "ds1", "centipededemon.jpg", startScore));
-                bosses.put("6", new Boss("Chaos Witch Quelaag", 6, "ds1", "quelaag.jpg", startScore));
-                bosses.put("7", new Boss("Crossbreed Priscilla", 7, "ds1", "priscilla.jpg", startScore));
-                bosses.put("8", new Boss("Dark Sun Gwyndolin", 8, "ds1", "gwyndolin.jpg", startScore));
-                bosses.put("9", new Boss("Demon Firesage", 9, "ds1", "demonfiresage.jpg", startScore));
-                bosses.put("10", new Boss("Dragonslayer Ornstein and Executioner Smough", 10, "ds1", "ons.jpg", startScore));
-                bosses.put("11", new Boss("Twin Princes", 11, "ds3", "twinprinces.jpg", startScore));
+                bosses.put((id).toString(), new Boss("Asylum Demon", id, "ds1", "asylumdemon.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Bed of Chaos", id, "ds1", "bedofchaos.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Bell Gargoyles", id, "ds1", "bellgargoyle.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Black Dragon Kalameet", id, "ds1", "kalameet.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Capra Demon", id, "ds1", "caprademon.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Ceaseless Discharge", id, "ds1", "ceaselessdischarge.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Centipede Demon", id, "ds1", "centipededemon.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Chaos Witch Quelaag", id, "ds1", "quelaag.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Crossbreed Priscilla", id, "ds1", "priscilla.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Dark Sun Gwyndolin", id, "ds1", "gwyndolin.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Demon Firesage", id, "ds1", "demonfiresage.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Dragonslayer Ornstein and Executioner Smough", id, "ds1", "ons.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Four Kings", id, "ds1", "fourkings.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Gaping Dragon", id, "ds1", "gapingdragon.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Gravelord Nito", id, "ds1", "nito.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Great Grey Wolf Sif", id, "ds1", "sif.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Gwyn, Lord of Cinder", id, "ds1", "gwyn.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Iron Golem", id, "ds1", "irongolem.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Knight Artorias", id, "ds1", "artorias.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Manus, Father of the Abyss", id, "ds1", "manus.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Moonlight Butterfly", id, "ds1", "moonlightbutterfly.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Pinwheel", id, "ds1", "pinwheel.jpg", startScore));id++;
+
+                bosses.put((id).toString(), new Boss("Twin Princes", id, "ds3", "twinprinces.jpg", startScore));id++;
                 mBossesRef.setValue(bosses);
 
 

@@ -29,7 +29,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="0.5"
-            app:cardBackgroundColor="@android:color/darker_gray"
+            app:cardBackgroundColor="@android:color/black"
             app:cardElevation="10dp">
 
             <LinearLayout
@@ -95,7 +95,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="0.5"
-            app:cardBackgroundColor="@android:color/darker_gray"
+            app:cardBackgroundColor="@android:color/black"
             app:cardElevation="10dp">
 
             <LinearLayout

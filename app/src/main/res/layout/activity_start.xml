@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Set"
+        android:text="Reset values"
         app:layout_constraintBaseline_toBaselineOf="@+id/database_tv"
         app:layout_constraintStart_toEndOf="@+id/database_tv" />
 
