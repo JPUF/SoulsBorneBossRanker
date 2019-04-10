@@ -33,7 +33,6 @@ public class StartActivity extends AppCompatActivity {
     BottomNavigationView navigation;
     TextView realtimeTextView;
     Button setButton;
-    ImageView testImage;
 
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mConditionRef = rootRef.child("condition");
@@ -73,7 +72,6 @@ public class StartActivity extends AppCompatActivity {
 
         realtimeTextView = (TextView) findViewById(R.id.database_tv);
         setButton = (Button) findViewById(R.id.button);
-        testImage = (ImageView) findViewById(R.id.test_iv);
 
     }
 
@@ -111,13 +109,6 @@ public class StartActivity extends AppCompatActivity {
                 Date date = new Date();
                 String dateS = dateFormat.format(date);
                 mConditionRef.setValue(dateS);
-
-                storageRef.child("boss_images/bellgargoyle.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(testImage);
-                    }
-                });
 
                 int startScore = 1000;
                 Integer id = 1;
