@@ -88,7 +88,7 @@ public class RankingActivity extends AppCompatActivity {
         outer_ll.setBackgroundColor(Color.BLACK);
 
         TextView rank_tv = new TextView(context);
-        LinearLayout.LayoutParams rankParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.1f);
+        LinearLayout.LayoutParams rankParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.11f);
         rank_tv.setLayoutParams(rankParams);
         rank_tv.setText(rank.toString());
         rank_tv.setTextColor(Color.WHITE);
@@ -125,6 +125,7 @@ public class RankingActivity extends AppCompatActivity {
 
         TextView name_tv = new TextView(context);
         LinearLayout.LayoutParams nameParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.85f);
+        nameParams.setMargins(8,0,2,0);
         name_tv.setLayoutParams(nameParams);
         name_tv.setText(boss.name);
         name_tv.setTextColor(Color.WHITE);

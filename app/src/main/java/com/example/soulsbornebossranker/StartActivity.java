@@ -192,15 +192,45 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put((id).toString(), new Boss("Dancer of the Boreal Valley", id, "ds3", "dancer.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Dragonslayer Armour", id, "ds3", "dragonslayerarmour.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Oceiros, the Consumed King", id, "ds3", "oceiros.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Champion Gundyr", id, "ds3", "championgundyr.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Lothric, Younger Prince and Lorian, Elder Prince", id, "ds3", "twinprinces.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Ancient Wyvern", id, "ds3", "wyvern.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Nameless King", id, "ds3", "namelessking.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Soul of Cinder", id, "ds3", "soulofcinder.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Sister Friede", id, "ds3", "friede.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Champion's Gravetender and Gravetender Greatwolf", id, "ds3", "gravetender.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Demon Prince", id, "ds3", "demonprince.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Halflight, Spear of the Church", id, "ds3", "halflight.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Darkeater Midir", id, "ds3", "midir.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Slave Knight Gael", id, "ds3", "gael.jpg", startScore));id++;
 
-                bosses.put((id).toString(), new Boss("Twin Princes", id, "ds3", "twinprinces.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Cleric Beast", id, "bb", "clericbeast.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Father Gascoigne", id, "bb", "gascoigne.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Blood-starved Beast", id, "bb", "bloodstarved.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("The Witch of Hemwick", id, "bb", "hemwick.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Darkbeast Paarl", id, "bb", "paarl.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Vicar Amelia", id, "bb", "amelia.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Shadow of Yharnam", id, "bb", "shadow.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Martyr Logarius", id, "bb", "logarius.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Amygdala", id, "bb", "amygdala.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Rom, the Vacuous Spider", id, "bb", "rom.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("The One Reborn", id, "bb", "reborn", startScore));id++;
+                bosses.put((id).toString(), new Boss("Celestial Emissary", id, "bb", "emissary.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Ebrietas, Daughter of the Cosmos", id, "bb", "ebrietas.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Micolash, Host of the Nightmare", id, "bb", "micolash.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Mergo's Wet Nurse", id, "bb", "mergos.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Gehrman, the First Hunter", id, "bb", "gehrman.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Moon Presence", id, "bb", "moonpresence.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Ludwig, the Holy Blade", id, "bb", "ludwig.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Laurence, the First Vicar", id, "bb", "laurence.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Living Failures", id, "bb", "failures.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Lady Maria of the Astral Clocktower", id, "bb", "maria.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Orphan of Kos", id, "bb", "orphan.jpg", startScore));id++;
+
+
+
                 mBossesRef.setValue(bosses);
-
-
             }
         });
     }
 }
-
-
-
