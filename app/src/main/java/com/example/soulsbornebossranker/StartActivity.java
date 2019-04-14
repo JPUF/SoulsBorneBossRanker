@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
+    //TODO probs change the 'about' imageview to a set of actual text views, do it properly
 
     BottomNavigationView navigation;
     TextView realtimeTextView;

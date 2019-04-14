@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class RankingActivity extends AppCompatActivity {
+    //TODO views in a Recycler instead?
 
     RankingController rankingController;
 
