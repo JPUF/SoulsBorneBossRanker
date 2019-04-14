@@ -33,7 +33,6 @@ public class StartActivity extends AppCompatActivity {
     BottomNavigationView navigation;
     TextView realtimeTextView;
     Button setButton;
-    ImageView testImage;
 
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mConditionRef = rootRef.child("condition");
@@ -73,7 +72,6 @@ public class StartActivity extends AppCompatActivity {
 
         realtimeTextView = (TextView) findViewById(R.id.database_tv);
         setButton = (Button) findViewById(R.id.button);
-        testImage = (ImageView) findViewById(R.id.test_iv);
 
     }
 
@@ -112,13 +110,6 @@ public class StartActivity extends AppCompatActivity {
                 String dateS = dateFormat.format(date);
                 mConditionRef.setValue(dateS);
 
-                storageRef.child("boss_images/bellgargoyle.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(testImage);
-                    }
-                });
-
                 int startScore = 1000;
                 Integer id = 1;
                 Map<String, Boss> bosses = new HashMap<>();
@@ -144,10 +135,39 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put((id).toString(), new Boss("Manus, Father of the Abyss", id, "ds1", "manus.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Moonlight Butterfly", id, "ds1", "moonlightbutterfly.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Pinwheel", id, "ds1", "pinwheel.jpg", startScore));id++;
-                bosses.put((id).toString(), new Boss("Sanctuary Guardian", id, "ds1", "sanctuaryguardian.jpg", startScore));id++;//
-                bosses.put((id).toString(), new Boss("Seath the Scaleless", id, "ds1", "seath.jpg", startScore));id++;//
-                bosses.put((id).toString(), new Boss("Stray Demon", id, "ds1", "straydemon.jpg", startScore));id++;//
-                bosses.put((id).toString(), new Boss("Taurus Demon", id, "ds1", "taurusdemon.jpg", startScore));id++;//
+
+                bosses.put((id).toString(), new Boss("The Last Giant", id, "ds2", "lastgiant.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Executioner's Chariot", id, "ds2", "chariot.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("The Pursuer", id, "ds2", "pursuer.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Looking Glass Knight", id, "ds2", "lookingglassknight.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("The Skeleton Lords", id, "ds2", "skeletonlords.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Flexile Sentry", id, "ds2", "flexilesentry.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Lost Sinner", id, "ds2", "lostsinner.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Belfry Gargoyles", id, "ds2", "belfrygargoyles.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Ruin Sentinels", id, "ds2", "ruinsentinals.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Royal Rat Vanguard", id, "ds2", "vanguard.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Royal Rat Authority", id, "ds2", "authority.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Scorpioness Najka", id, "ds2", "najka.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("The Duke's Dear Freja", id, "ds2", "freja.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Mytha, the Baneful Queen", id, "ds2", "mytha.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("The Rotten", id, "ds2", "rotten.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Old Dragonslayer", id, "ds2", "dragonslayer.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Covetous Demon", id, "ds2", "covetousdemon.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Smelter Demon", id, "ds2", "smelterdemon.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Old Iron King", id, "ds2", "oldironking.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Guardian Dragon", id, "ds2", "guardiandragon.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Demon of Song", id, "ds2", "demonofsong.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Velstadt, the Royal Aegis", id, "ds2", "velstadt.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Darklurker", id, "ds2", "darklurker.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Dragonrider", id, "ds2", "dragonrider.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Twin Dragonriders", id, "ds2", "twindragonriders.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Prowling Magus and Congregation", id, "ds2", "prowlingmagus.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Dragonrider", id, "ds2", "dragonrider.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Giant Lord", id, "ds2", "giantlord.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Ancient Dragon", id, "ds2", "ancientdragon.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Throne Watcher and Throne Defender", id, "ds2", "watcherdefender.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Nashandra, Queen Regent of Drangleic", id, "ds2", "nashandra.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Aldia, Scholar of the First Sin", id, "ds2", "aldia.jpg", startScore));id++;
 
                 bosses.put((id).toString(), new Boss("Twin Princes", id, "ds3", "twinprinces.jpg", startScore));id++;
                 mBossesRef.setValue(bosses);
@@ -157,5 +177,6 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 }
+
 
 
