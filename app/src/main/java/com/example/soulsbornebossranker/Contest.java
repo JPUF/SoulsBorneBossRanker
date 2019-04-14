@@ -14,8 +14,6 @@ public class Contest {
     private Boss winner;
     private Boss loser;
 
-    //TODO demo writing score to DB. Then start figuring out ELO stuff.
-
     public Contest(Boss winner, Boss loser) {
         databaseRef = FirebaseDatabase.getInstance().getReference();
         this.winner = winner;

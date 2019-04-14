@@ -144,7 +144,7 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put((id).toString(), new Boss("Flexile Sentry", id, "ds2", "flexilesentry.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Lost Sinner", id, "ds2", "lostsinner.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Belfry Gargoyles", id, "ds2", "belfrygargoyles.jpg", startScore));id++;
-                bosses.put((id).toString(), new Boss("Ruin Sentinels", id, "ds2", "ruinsentinals.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Ruin Sentinels", id, "ds2", "ruinsentinels.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Royal Rat Vanguard", id, "ds2", "vanguard.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Royal Rat Authority", id, "ds2", "authority.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Scorpioness Najka", id, "ds2", "najka.jpg", startScore));id++;
@@ -168,6 +168,30 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put((id).toString(), new Boss("Throne Watcher and Throne Defender", id, "ds2", "watcherdefender.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Nashandra, Queen Regent of Drangleic", id, "ds2", "nashandra.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Aldia, Scholar of the First Sin", id, "ds2", "aldia.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Elana, Squalid Queen", id, "ds2", "elana.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Sinh , the Slumbering Dragon", id, "ds2", "sinh.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Afflicted Graverobber, Ancient Soldier Varg, and Cerah the Old Explorer", id, "ds2", "graverobber.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Blue Smelter Demon", id, "ds2", "bluesmelter.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Fume Knight", id, "ds2", "fumeknight.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Sir Alonne", id, "ds2", "siralonne.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Burnt Ivory King", id, "ds2", "burntivoryking.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Aava, the King's Pet", id, "ds2", "aava.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Lud and Zallen, the King's Pets", id, "ds2", "ludandzallen.jpg", startScore));id++;
+
+                bosses.put((id).toString(), new Boss("Iudex Gundyr", id, "ds3", "iudexgundyr.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Vordt of the Boreal Valley", id, "ds3", "vordt.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Curse-Rotted Greatwood", id, "ds3", "curserotted.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Crystal Sage", id, "ds3", "crystalsage.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Abyss Watchers", id, "ds3", "abysswatchers.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Deacons of the Deep", id, "ds3", "deacons.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("High Lord Wolnir", id, "ds3", "wolnir.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Old Demon King", id, "ds3", "olddemonking.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Pontiff Sulyvahn", id, "ds3", "pontiff.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Yhorm the Giant", id, "ds3", "yhorm.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Aldrich, Devourer of Gods", id, "ds3", "aldrich.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Dancer of the Boreal Valley", id, "ds3", "dancer.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Dragonslayer Armour", id, "ds3", "dragonslayerarmour.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Oceiros, the Consumed King", id, "ds3", "oceiros.jpg", startScore));id++;
 
                 bosses.put((id).toString(), new Boss("Twin Princes", id, "ds3", "twinprinces.jpg", startScore));id++;
                 mBossesRef.setValue(bosses);
