@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ public class RankingActivity extends AppCompatActivity {
     RankingController rankingController;
 
     BottomNavigationView navigation;
+    Spinner rankingPicker;
     LinearLayout ranking_layout;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -57,10 +61,27 @@ public class RankingActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(2).setChecked(true);
 
+        rankingPicker = (Spinner) findViewById(R.id.rankingPicker);
         ranking_layout = (LinearLayout) findViewById(R.id.ranking_layout);
-        //populateTableFromFirebase();//if reading from online
-        populateTableFromLocal();
 
+        rankingPicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                if(selectedItem.equals("Personal rankings"))
+                {
+                    populateTableFromLocal();
+                }
+                else if (selectedItem.equals("Global rankings")) {
+                    populateTableFromFirebase();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                populateTableFromLocal();
+            }
+        });
     }
 
     private void populateTableFromFirebase() {

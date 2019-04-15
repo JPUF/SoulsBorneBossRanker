@@ -66,14 +66,23 @@ public class RankingController {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                final List<Boss> bosses = localDB.bossDao().getAll();//on background thread.
+                List<Boss> bosses = localDB.bossDao().getAll();//on background thread.
+                Collections.sort(bosses, new Comparator<Boss>() {
+                    @Override
+                    public int compare(Boss b1, Boss b2) {
+                        return b2.points - b1.points;
+                    }
+                });
+                final List<Boss> sortedBosses = bosses;
+
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        activity.populateTableFromList(bosses);//on UI thread.
+                        activity.populateTableFromList(sortedBosses);//on UI thread.
                     }
                 });
             }
         });
+        localDB.close();
     }
 }

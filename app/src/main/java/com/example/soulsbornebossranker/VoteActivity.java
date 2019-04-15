@@ -84,14 +84,14 @@ public class VoteActivity extends AppCompatActivity {
 
         bossImage1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new Contest(upperBoss, lowerBoss);
+                new Contest(getApplicationContext(), upperBoss, lowerBoss);
                 setCardsToRandomBosses();
             }
         });
 
         bossImage2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new Contest(lowerBoss, upperBoss);
+                new Contest(getApplicationContext(), lowerBoss, upperBoss);
                 setCardsToRandomBosses();
             }
         });

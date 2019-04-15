@@ -34,6 +34,9 @@ import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
     //TODO probs change the 'about' imageview to a set of actual text views, do it properly
+    //TODO update scores in local DB.
+    //TODO change implementation so local rankings can be done without internet connection.
+    //TODO find and fix database leaks.
 
     BottomNavigationView navigation;
     TextView realtimeTextView;
@@ -44,8 +47,6 @@ public class StartActivity extends AppCompatActivity {
     DatabaseReference mBossesRef = rootRef.child("bosses");
 
     LocalDatabase localDB;
-
-    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -247,6 +248,7 @@ public class StartActivity extends AppCompatActivity {
                         localDB.bossDao().insertAll(finalLocalBosses);
                     }
                 });
+                localDB.close();
 
             }
         });

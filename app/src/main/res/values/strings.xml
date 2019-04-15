@@ -14,4 +14,8 @@
     <string name="ranking_title">Rankings</string>
     <string name="elo_value">1920</string>
     <string name="ranking_key">Rank     Boss     ELO</string>
+    <string-array name="ranking_types">
+        <item>Personal rankings</item>
+        <item>Global rankings</item>
+    </string-array>
 </resources>
