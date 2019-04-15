@@ -14,48 +14,50 @@ public class Contest {
 
     private DatabaseReference databaseRef;
 
-    private Boss winner;
-    private Boss loser;
+    private Boss winnerOnline;
+    private Boss loserOnline;
 
     public Contest(Context context, Boss winner, Boss loser) {
         databaseRef = FirebaseDatabase.getInstance().getReference();
-        this.winner = winner;
-        this.loser = loser;
-        scoreResult(context, this.winner, this.loser);
+        this.winnerOnline = winner;
+        this.loserOnline = loser;
+        scoreResultOnline();
+        scoreResultLocal(context);
     }
 
-    private void scoreResult(Context context, Boss winner, Boss loser) {
-        Log.i("Result", "winner: " + winner.name + " loser: " + loser.name);
-
-        double qWinner = Math.pow(10,((double) winner.points / 400.0d));
-        double qLoser = Math.pow(10,((double) loser.points / 400.0d));
-        double expectedWinner = qWinner / (qWinner + qLoser);
-        double expectedLoser = qLoser / (qLoser + qWinner);
-        winner.points = (int) Math.rint(((double) winner.points) + 32.0d * (1.0d - expectedWinner));
-        loser.points  = (int) Math.rint(((double) loser.points)  + 32.0d * (0.0d - expectedLoser));
-
-        Log.i("score", "winner: "+winner.points + " loser: "+loser.points);
-        updateScoresInFirebase();
-        updateScoresInLocal(context);
-
+    private void scoreResultOnline() {
+        int newPoints[] = eloScore(winnerOnline.points, loserOnline.points);
+        winnerOnline.points = newPoints[0];
+        loserOnline.points  = newPoints[1];
+        DatabaseReference bossRef = databaseRef.child("bosses/" + winnerOnline.id);
+        bossRef.child("points").setValue(winnerOnline.points);
+        bossRef = databaseRef.child("bosses/" + loserOnline.id);
+        bossRef.child("points").setValue(loserOnline.points);
     }
 
-    private void updateScoresInFirebase() {
-        DatabaseReference bossRef = databaseRef.child("bosses/" + winner.id);
-        bossRef.child("points").setValue(winner.points);
-        bossRef = databaseRef.child("bosses/" + loser.id);
-        bossRef.child("points").setValue(loser.points);
-    }
-
-    private void updateScoresInLocal(Context context) {
+    private void scoreResultLocal(Context context) {
         final LocalDatabase localDB = Room.databaseBuilder(context, LocalDatabase.class, "local-database").build();
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {//on background thread.
-                localDB.bossDao().updateBoss(winner.id, winner.points);
-                localDB.bossDao().updateBoss(loser.id, loser.points);
+                Boss winnerLocal = localDB.bossDao().loadBoss(winnerOnline.id);
+                Boss loserLocal = localDB.bossDao().loadBoss(loserOnline.id);
+                int newPoints[] = eloScore(winnerLocal.points, winnerLocal.points);
+                localDB.bossDao().updateBoss(winnerLocal.id, newPoints[0]);
+                localDB.bossDao().updateBoss(loserLocal.id, newPoints[1]);
                 localDB.close();
             }
         });
+    }
+
+    private int[] eloScore(int winnerPoints, int loserPoints) {
+        double qWinner = Math.pow(10,((double) winnerPoints / 400.0d));
+        double qLoser = Math.pow(10,((double) loserPoints / 400.0d));
+        double expectedWinner = qWinner / (qWinner + qLoser);
+        double expectedLoser = qLoser / (qLoser + qWinner);
+        winnerPoints = (int) Math.rint(((double) winnerPoints) + 32.0d * (1.0d - expectedWinner));
+        loserPoints  = (int) Math.rint(((double) loserPoints)  + 32.0d * (0.0d - expectedLoser));
+        int returnArray[] = {winnerPoints, loserPoints};
+        return returnArray;
     }
 }
