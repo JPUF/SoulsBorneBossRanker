@@ -54,8 +54,8 @@ public class Contest {
             public void run() {//on background thread.
                 localDB.bossDao().updateBoss(winner.id, winner.points);
                 localDB.bossDao().updateBoss(loser.id, loser.points);
+                localDB.close();
             }
         });
-        localDB.close();
     }
 }

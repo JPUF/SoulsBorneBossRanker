@@ -67,6 +67,7 @@ public class RankingController {
             @Override
             public void run() {
                 List<Boss> bosses = localDB.bossDao().getAll();//on background thread.
+                localDB.close();
                 Collections.sort(bosses, new Comparator<Boss>() {
                     @Override
                     public int compare(Boss b1, Boss b2) {
@@ -83,6 +84,5 @@ public class RankingController {
                 });
             }
         });
-        localDB.close();
     }
 }
