@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {
     //TODO views in a Recycler instead?
@@ -50,25 +51,21 @@ public class RankingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
 
-        rankingController = new RankingController();
+        rankingController = new RankingController(this);
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(2).setChecked(true);
 
         ranking_layout = (LinearLayout) findViewById(R.id.ranking_layout);
-        populateTable();
-        /*
-        for(int i = 0; i < 10; i++) {
-            ranking_layout.addView(createRow(new Boss("Twin Princes", 11, "ds3", "twinprices.jpg", 1000)));
-            ranking_layout.addView(createRow(new Boss("Ornstein and Smough", 10, "ds1", "ons.jpg", 1000)));
-        }
-        */
+        //populateTableFromFirebase();//if reading from online
+        populateTableFromLocal();
 
     }
 
-    private void populateTable() {
-        rankingController.readAllBosses(new RankingController.DataStatus() {
+    private void populateTableFromFirebase() {
+        ranking_layout.removeAllViews();
+        rankingController.readAllBossesFromFirebase(new RankingController.DataStatus() {
             @Override
             public void DataIsLoaded(ArrayList<Boss> bosses) {
                 int rank = 1;
@@ -77,6 +74,19 @@ public class RankingActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void populateTableFromLocal() {
+        ranking_layout.removeAllViews();
+        rankingController.readAllBossesFromLocal(getApplicationContext());
+    }
+
+    public void populateTableFromList(List<Boss> bosses) {
+        ranking_layout.removeAllViews();
+        int rank = 1;
+        for(Boss boss : bosses) {
+            ranking_layout.addView(createRow(boss, rank++));
+        }
     }
 
     public LinearLayout createRow(Boss boss, Integer rank) {

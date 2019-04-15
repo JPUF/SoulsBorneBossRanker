@@ -1,7 +1,9 @@
 package com.example.soulsbornebossranker;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -24,8 +26,10 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
@@ -39,8 +43,9 @@ public class StartActivity extends AppCompatActivity {
     DatabaseReference mConditionRef = rootRef.child("condition");
     DatabaseReference mBossesRef = rootRef.child("bosses");
 
+    LocalDatabase localDB;
+
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,6 +71,8 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        localDB = Room.databaseBuilder(getApplicationContext(), LocalDatabase.class, "local-database").build();
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -170,7 +177,7 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put((id).toString(), new Boss("Nashandra, Queen Regent of Drangleic", id, "ds2", "nashandra.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Aldia, Scholar of the First Sin", id, "ds2", "aldia.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Elana, Squalid Queen", id, "ds2", "elana.jpg", startScore));id++;
-                bosses.put((id).toString(), new Boss("Sinh , the Slumbering Dragon", id, "ds2", "sinh.jpg", startScore));id++;
+                bosses.put((id).toString(), new Boss("Sinh, the Slumbering Dragon", id, "ds2", "sinh.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Afflicted Graverobber, Ancient Soldier Varg, and Cerah the Old Explorer", id, "ds2", "graverobber.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Blue Smelter Demon", id, "ds2", "bluesmelter.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Fume Knight", id, "ds2", "fumeknight.jpg", startScore));id++;
@@ -215,7 +222,7 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put((id).toString(), new Boss("Martyr Logarius", id, "bb", "logarius.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Amygdala", id, "bb", "amygdala.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Rom, the Vacuous Spider", id, "bb", "rom.jpg", startScore));id++;
-                bosses.put((id).toString(), new Boss("The One Reborn", id, "bb", "reborn", startScore));id++;
+                bosses.put((id).toString(), new Boss("The One Reborn", id, "bb", "reborn.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Celestial Emissary", id, "bb", "emissary.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Ebrietas, Daughter of the Cosmos", id, "bb", "ebrietas.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Micolash, Host of the Nightmare", id, "bb", "micolash.jpg", startScore));id++;
@@ -226,11 +233,21 @@ public class StartActivity extends AppCompatActivity {
                 bosses.put((id).toString(), new Boss("Laurence, the First Vicar", id, "bb", "laurence.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Living Failures", id, "bb", "failures.jpg", startScore));id++;
                 bosses.put((id).toString(), new Boss("Lady Maria of the Astral Clocktower", id, "bb", "maria.jpg", startScore));id++;
-                bosses.put((id).toString(), new Boss("Orphan of Kos", id, "bb", "orphan.jpg", startScore));id++;
-
-
+                bosses.put((id).toString(), new Boss("Orphan of Kos", id, "bb", "orphan.jpg", startScore));
 
                 mBossesRef.setValue(bosses);
+                List<Boss> localBosses = new ArrayList<>();
+                for(Integer i = 1; i <= id; i++) {
+                    localBosses.add(bosses.get(i.toString()));
+                }
+                final List<Boss> finalLocalBosses = localBosses;
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        localDB.bossDao().insertAll(finalLocalBosses);
+                    }
+                });
+
             }
         });
     }
