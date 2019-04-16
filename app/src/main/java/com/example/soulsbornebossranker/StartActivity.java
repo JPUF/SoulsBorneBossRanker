@@ -2,15 +2,18 @@ package com.example.soulsbornebossranker;
 
 import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +41,9 @@ public class StartActivity extends AppCompatActivity {
     //TODO change implementation so local rankings can be done without internet connection.
 
     BottomNavigationView navigation;
+    ArrayList<CheckBox> checkBoxes = new ArrayList<>();
+    boolean playedGames[] = {true, true, true, true};
+
     TextView realtimeTextView;
     Button setButton;
 
@@ -67,6 +73,51 @@ public class StartActivity extends AppCompatActivity {
         }
     };
 
+    private int numberPlayed() {
+        int played = 0;
+        for(boolean b : playedGames)
+            if(b)
+                played += 1;
+        return played;
+    }
+
+    private View.OnClickListener mOnCheckBoxClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            boolean checked = ((CheckBox) view).isChecked();
+            switch (view.getId()) {
+                case R.id.checkBoxDS1:
+                    if(checked || numberPlayed() > 1) {
+                        playedGames[0] = checked;
+                    }
+                    else
+                        ((CheckBox) view).setChecked(true);
+                    break;
+                case R.id.checkBoxDS2:
+                    if(checked || numberPlayed() > 1) {
+                        playedGames[1] = checked;
+                    }
+                    else
+                        ((CheckBox) view).setChecked(true);
+                    break;
+                case R.id.checkBoxDS3:
+                    if(checked || numberPlayed() > 1) {
+                        playedGames[2] = checked;
+                    }
+                    else
+                        ((CheckBox) view).setChecked(true);
+                    break;
+                case R.id.checkBoxBB:
+                    if(checked || numberPlayed() > 1) {
+                        playedGames[3] = checked;
+                    }
+                    else
+                        ((CheckBox) view).setChecked(true);
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,18 +129,37 @@ public class StartActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(0).setChecked(true);
 
+        checkBoxes.add((CheckBox) findViewById(R.id.checkBoxDS1));
+        checkBoxes.add((CheckBox) findViewById(R.id.checkBoxDS2));
+        checkBoxes.add((CheckBox) findViewById(R.id.checkBoxDS3));
+        checkBoxes.add((CheckBox) findViewById(R.id.checkBoxBB));
+        for(CheckBox cb : checkBoxes) cb.setOnClickListener(mOnCheckBoxClickListener);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            this.playedGames = extras.getBooleanArray("playedGames");
+            for (int i = 0; i < checkBoxes.size(); i++){
+                CheckBox cb = checkBoxes.get(i);
+                cb.setChecked(playedGames[i]);
+            }
+        }
+
         realtimeTextView = (TextView) findViewById(R.id.database_tv);
         setButton = (Button) findViewById(R.id.button);
 
     }
 
+
+
     public void startVote() {
         Intent intent = new Intent(this, VoteActivity.class);
+        intent.putExtra("playedGames", playedGames);
         startActivity(intent);
     }
 
     public void startRanking() {
         Intent intent = new Intent(this, RankingActivity.class);
+        intent.putExtra("playedGames", playedGames);
         startActivity(intent);
     }
 

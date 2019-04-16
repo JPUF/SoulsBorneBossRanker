@@ -25,6 +25,7 @@ public class RankingActivity extends AppCompatActivity {
     //TODO views in a Recycler instead?
 
     RankingController rankingController;
+    private boolean playedGames[];
 
     BottomNavigationView navigation;
     Spinner rankingPicker;
@@ -56,6 +57,10 @@ public class RankingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
 
         rankingController = new RankingController(this);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+            playedGames = extras.getBooleanArray("playedGames");
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -187,11 +192,13 @@ public class RankingActivity extends AppCompatActivity {
 
     public void startMain() {
         Intent intent = new Intent(this, VoteActivity.class);
+        intent.putExtra("playedGames", playedGames);
         startActivity(intent);
     }
 
     public void startAbout() {
         Intent intent = new Intent(this, StartActivity.class);
+        intent.putExtra("playedGames", playedGames);
         startActivity(intent);
     }
 }

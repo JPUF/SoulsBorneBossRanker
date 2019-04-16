@@ -20,12 +20,117 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <ImageView
-                android:id="@+id/about"
+            <TextView
+                android:id="@+id/about1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:lineSpacingExtra="-32sp"
+                android:text="Vote on your favourite bosses."
+                android:textColor="@android:color/black"
+                android:textSize="42sp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDS1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:checked="true"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:text="Dark Souls 1"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDS2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:checked="true"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:text="Dark Souls 2"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDS3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:checked="true"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:text="Dark Souls 3"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxBB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:checked="true"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:text="Bloodborne"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/about3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:lineSpacingExtra="-24sp"
+                android:text="For each pair, simply tap on your winner. \n\nSkip if you can't decide."
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/about2"
+                android:layout_width="match_parent"
+                android:layout_height="200sp"
+                android:layout_marginTop="10sp"
                 android:adjustViewBounds="true"
-                app:srcCompat="@drawable/about" />
+                app:srcCompat="@drawable/votedemo" />
+
+            <TextView
+                android:id="@+id/about5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:lineSpacingExtra="-24sp"
+                android:text="Each boss is rated using the Elo system from chess tournaments."
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/about4"
+                android:layout_width="match_parent"
+                android:layout_height="200sp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/rankdemo" />
+
+            <TextView
+                android:id="@+id/about7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:lineSpacingExtra="-24sp"
+                android:text="The rankings are based off everyone's votes!"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/about6"
+                android:layout_width="match_parent"
+                android:layout_height="188sp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/globe" />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
