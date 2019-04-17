@@ -39,6 +39,7 @@ public class StartActivity extends AppCompatActivity {
     //TODO change implementation so local rankings can be done without internet connection.
     //TODO filter ranking by game.
     //TODO make game choice permanent. Save to a file. So, load on startup, update at every change.
+    //      Currently, played games are stored in DB, from onCreate. So now, initialise local playedGames[] to whatever is stored.
 
     BottomNavigationView navigation;
     ArrayList<CheckBox> checkBoxes = new ArrayList<>();
@@ -124,6 +125,19 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         localDB = Room.databaseBuilder(getApplicationContext(), LocalDatabase.class, "local-database").build();
+        ArrayList<Game> games = new ArrayList<>();
+        games.add(new Game(1));//ds1
+        games.add(new Game(2));//ds2
+        games.add(new Game(3));//ds3
+        games.add(new Game(4));//bb
+        final ArrayList<Game> finalGames = games;
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                localDB.gameDao().insertAll(finalGames);
+            }
+        });
+
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

@@ -73,7 +73,7 @@ public class RankingController {
                     public int compare(Boss b1, Boss b2) {
                         return b2.points - b1.points;
                     }
-                });
+                }); 
                 final List<Boss> sortedBosses = bosses;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
