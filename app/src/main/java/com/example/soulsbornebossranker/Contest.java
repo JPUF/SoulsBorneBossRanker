@@ -36,7 +36,7 @@ public class Contest {
     }
 
     private void scoreResultLocal(Context context) {
-        final LocalDatabase localDB = Room.databaseBuilder(context, LocalDatabase.class, "local-database").build();
+        final LocalDatabase localDB = LocalDatabase.getInstance(context);
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {//on background thread.
@@ -45,7 +45,6 @@ public class Contest {
                 int newPoints[] = eloScore(winnerLocal.points, winnerLocal.points);
                 localDB.bossDao().updateBoss(winnerLocal.id, newPoints[0]);
                 localDB.bossDao().updateBoss(loserLocal.id, newPoints[1]);
-                localDB.close();
             }
         });
     }

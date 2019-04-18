@@ -38,13 +38,11 @@ public class VoteController {
         } while(bossInUse == randomBossID);
         bossInUse = randomBossID;
         DatabaseReference bossRef = databaseRef.child("bosses/" + randomBossID);
-        Log.i("ControllerBoss", "randomID: " + randomBossID);
 
         bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boss b = dataSnapshot.getValue(Boss.class);
-                Log.i("ControllerBoss", "inner: " + b.name);
                 boss = b;
                 dataStatus.DataIsLoaded(boss);
             }

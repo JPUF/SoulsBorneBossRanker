@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Process;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -62,12 +61,11 @@ public class RankingController {
     }
 
     public void readAllBossesFromLocal(final Context context) {
-        final LocalDatabase localDB = Room.databaseBuilder(context, LocalDatabase.class, "local-database").build();
+        final LocalDatabase localDB = LocalDatabase.getInstance(context);
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 List<Boss> bosses = localDB.bossDao().getAll();//on background thread.
-                localDB.close();
                 Collections.sort(bosses, new Comparator<Boss>() {
                     @Override
                     public int compare(Boss b1, Boss b2) {

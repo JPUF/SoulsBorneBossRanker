@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.concurrent.Executors;
 
@@ -18,8 +19,10 @@ public abstract class LocalDatabase extends RoomDatabase {
 
     public synchronized static LocalDatabase getInstance(Context context) {
         if(INSTANCE == null) {
+            Log.i("startupDB", "db didn't exist, building db.");
             INSTANCE = buildDatabase(context);
         }
+        Log.i("startupDB", "returning db");
         return INSTANCE;
     }
 
