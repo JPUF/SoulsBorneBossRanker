@@ -1,6 +1,7 @@
 package com.example.soulsbornebossranker;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.io.InputStream;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class VoteActivity extends AppCompatActivity {
@@ -110,12 +112,14 @@ public class VoteActivity extends AppCompatActivity {
         else if (boss.game.contains("bb"))
             gameImage1.setImageResource(R.drawable.bb);
 
-        storageRef.child("boss_images/" + boss.imagePath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(bossImage1);
-            }
-        });
+        try {
+            String pathString = boss.imagePath.substring(0, boss.imagePath.length()-4);
+            Uri uri = Uri.parse("android.resource://com.example.soulsbornebossranker/drawable/" + pathString);
+            bossImage1.setImageURI(uri);
+        }
+        catch (Exception e) {
+            Log.e("ImageView", e.toString());
+        }
     }
 
     public void setLowerCardToBoss(Boss boss) {
@@ -130,12 +134,14 @@ public class VoteActivity extends AppCompatActivity {
         else if (boss.game.contains("bb"))
             gameImage2.setImageResource(R.drawable.bb);
 
-        storageRef.child("boss_images/" + boss.imagePath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(bossImage2);
-            }
-        });
+        try {
+            String pathString = boss.imagePath.substring(0, boss.imagePath.length()-4);
+            Uri uri = Uri.parse("android.resource://com.example.soulsbornebossranker/drawable/" + pathString);
+            bossImage2.setImageURI(uri);
+        }
+        catch (Exception e) {
+            Log.e("ImageView", e.toString());
+        }
     }
 
     private void setCardsToRandomBosses() {

@@ -50,25 +50,7 @@ public class StartActivity extends AppCompatActivity {
 
     LocalDatabase localDB;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_about:
-
-                    return true;
-                case R.id.navigation_vote:
-                    startVote();
-                    return true;
-                case R.id.navigation_rankings:
-                    startRanking();
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,16 +66,6 @@ public class StartActivity extends AppCompatActivity {
         realtimeTextView = (TextView) findViewById(R.id.database_tv);
         setButton = (Button) findViewById(R.id.button);
 
-    }
-
-    public void startVote() {
-        Intent intent = new Intent(this, VoteActivity.class);
-        startActivity(intent);
-    }
-
-    public void startRanking() {
-        Intent intent = new Intent(this, RankingActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -254,5 +226,35 @@ public class StartActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_about:
+
+                    return true;
+                case R.id.navigation_vote:
+                    startVote();
+                    return true;
+                case R.id.navigation_rankings:
+                    startRanking();
+                    return true;
+            }
+            return false;
+        }
+    };
+
+    public void startVote() {
+        Intent intent = new Intent(this, VoteActivity.class);
+        startActivity(intent);
+    }
+
+    public void startRanking() {
+        Intent intent = new Intent(this, RankingActivity.class);
+        startActivity(intent);
     }
 }
