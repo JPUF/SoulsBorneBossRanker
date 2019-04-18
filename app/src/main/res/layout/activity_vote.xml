@@ -135,7 +135,8 @@
                         android:background="@color/colorAccent"
                         android:elevation="4dp"
                         android:text="SKIP"
-                        android:textColor="@android:color/darker_gray" />
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 

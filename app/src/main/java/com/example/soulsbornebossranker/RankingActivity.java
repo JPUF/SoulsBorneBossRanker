@@ -170,7 +170,7 @@ public class RankingActivity extends AppCompatActivity {
         name_tv.setMaxLines(2);
 
         TextView elo_tv = new TextView(context);
-        LinearLayout.LayoutParams eloParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.15f);
+        LinearLayout.LayoutParams eloParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.15f);
         elo_tv.setLayoutParams(eloParams);
         Integer points = boss.points;
         elo_tv.setText(points.toString());
