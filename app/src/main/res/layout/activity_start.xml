@@ -31,50 +31,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="42sp" />
 
-            <CheckBox
-                android:id="@+id/checkBoxDS1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50sp"
-                android:checked="true"
-                android:fontFamily="@font/palanquin_dark_semibold"
-                android:text="Dark Souls 1"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <CheckBox
-                android:id="@+id/checkBoxDS2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50sp"
-                android:checked="true"
-                android:fontFamily="@font/palanquin_dark_semibold"
-                android:text="Dark Souls 2"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <CheckBox
-                android:id="@+id/checkBoxDS3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50sp"
-                android:checked="true"
-                android:fontFamily="@font/palanquin_dark_semibold"
-                android:text="Dark Souls 3"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <CheckBox
-                android:id="@+id/checkBoxBB"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50sp"
-                android:checked="true"
-                android:fontFamily="@font/palanquin_dark_semibold"
-                android:text="Bloodborne"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
             <TextView
                 android:id="@+id/about3"
                 android:layout_width="match_parent"

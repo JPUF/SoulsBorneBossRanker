@@ -37,13 +37,9 @@ import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
     //TODO change implementation so local rankings can be done without internet connection.
-    //TODO filter ranking by game.
-    //TODO make game choice permanent. Save to a file. So, load on startup, update at every change.
-    //      Currently, played games are stored in DB, from onCreate. So now, initialise local playedGames[] to whatever is stored.
+    //TODO reduce what's stored online. Only really need to store boss ID and points online I think.
 
     BottomNavigationView navigation;
-    ArrayList<CheckBox> checkBoxes = new ArrayList<>();
-    boolean playedGames[] = {true, true, true, true};
 
     TextView realtimeTextView;
     Button setButton;
@@ -74,106 +70,29 @@ public class StartActivity extends AppCompatActivity {
         }
     };
 
-    private int numberPlayed() {
-        int played = 0;
-        for(boolean b : playedGames)
-            if(b)
-                played += 1;
-        return played;
-    }
-
-    private View.OnClickListener mOnCheckBoxClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            boolean checked = ((CheckBox) view).isChecked();
-            switch (view.getId()) {
-                case R.id.checkBoxDS1:
-                    if(checked || numberPlayed() > 1) {
-                        playedGames[0] = checked;
-                    }
-                    else
-                        ((CheckBox) view).setChecked(true);
-                    break;
-                case R.id.checkBoxDS2:
-                    if(checked || numberPlayed() > 1) {
-                        playedGames[1] = checked;
-                    }
-                    else
-                        ((CheckBox) view).setChecked(true);
-                    break;
-                case R.id.checkBoxDS3:
-                    if(checked || numberPlayed() > 1) {
-                        playedGames[2] = checked;
-                    }
-                    else
-                        ((CheckBox) view).setChecked(true);
-                    break;
-                case R.id.checkBoxBB:
-                    if(checked || numberPlayed() > 1) {
-                        playedGames[3] = checked;
-                    }
-                    else
-                        ((CheckBox) view).setChecked(true);
-                    break;
-            }
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
         localDB = Room.databaseBuilder(getApplicationContext(), LocalDatabase.class, "local-database").build();
-        ArrayList<Game> games = new ArrayList<>();
-        games.add(new Game(1));//ds1
-        games.add(new Game(2));//ds2
-        games.add(new Game(3));//ds3
-        games.add(new Game(4));//bb
-        final ArrayList<Game> finalGames = games;
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                localDB.gameDao().insertAll(finalGames);
-            }
-        });
-
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(0).setChecked(true);
-
-        checkBoxes.add((CheckBox) findViewById(R.id.checkBoxDS1));
-        checkBoxes.add((CheckBox) findViewById(R.id.checkBoxDS2));
-        checkBoxes.add((CheckBox) findViewById(R.id.checkBoxDS3));
-        checkBoxes.add((CheckBox) findViewById(R.id.checkBoxBB));
-        for(CheckBox cb : checkBoxes) cb.setOnClickListener(mOnCheckBoxClickListener);
-
-        Bundle extras = getIntent().getExtras();
-        if(extras != null) {
-            this.playedGames = extras.getBooleanArray("playedGames");
-            for (int i = 0; i < checkBoxes.size(); i++){
-                CheckBox cb = checkBoxes.get(i);
-                cb.setChecked(playedGames[i]);
-            }
-        }
 
         realtimeTextView = (TextView) findViewById(R.id.database_tv);
         setButton = (Button) findViewById(R.id.button);
 
     }
 
-
-
     public void startVote() {
         Intent intent = new Intent(this, VoteActivity.class);
-        intent.putExtra("playedGames", playedGames);
         startActivity(intent);
     }
 
     public void startRanking() {
         Intent intent = new Intent(this, RankingActivity.class);
-        intent.putExtra("playedGames", playedGames);
         startActivity(intent);
     }
 

@@ -32,8 +32,6 @@ public class VoteActivity extends AppCompatActivity {
     BottomNavigationView navigation;
     Button skipButton;
 
-    boolean playedGames[];
-
     //Boss #1             Boss #2
     Boss upperBoss;       Boss lowerBoss;
     ImageView bossImage1; ImageView bossImage2;
@@ -65,11 +63,7 @@ public class VoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
-        Bundle extras = getIntent().getExtras();
-        if(extras != null)
-            playedGames = extras.getBooleanArray("playedGames");
-
-        voteController = new VoteController(playedGames);
+        voteController = new VoteController();
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -161,12 +155,10 @@ public class VoteActivity extends AppCompatActivity {
     }
     public void startAbout() {
         Intent intent = new Intent(this, StartActivity.class);
-        intent.putExtra("playedGames", playedGames);
         startActivity(intent);
     }
     public void startRanking() {
         Intent intent = new Intent(this, RankingActivity.class);
-        intent.putExtra("playedGames", playedGames);
         startActivity(intent);
     }
 }

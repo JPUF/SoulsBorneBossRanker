@@ -20,11 +20,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class VoteController {
     private Boss boss;
     private DatabaseReference databaseRef;
-    private boolean playedGames[];
     private static int bossInUse = 0;
 
-    public VoteController(boolean playedGames[]) {
-        this.playedGames = playedGames;
+    public VoteController() {
         databaseRef = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -32,24 +30,12 @@ public class VoteController {
         void DataIsLoaded(Boss upperBoss);
     }
 
-
     //TODO pick random boss value, then filter out if it shouldn't be picked.
     public void readRandomBoss(final DataStatus dataStatus) {
         int randomBossID;
-        int randomDS1; int randomDS2; int randomDS3; int randomBB;
-        ArrayList<Integer> ranges = new ArrayList<>();
-        if(playedGames[0]){ranges.add(0);ranges.add(22);}
-        if(playedGames[1]){ranges.add(22);ranges.add(63);}
-        if(playedGames[2]){ranges.add(63);ranges.add(88);}
-        if(playedGames[3]){ranges.add(88);ranges.add(110);}
-        Log.i("randomWI", "ds1 = " + playedGames[0] + " ds2 = " + playedGames[1] + " ds3 = " + playedGames[2] + " bb = " + playedGames[3]);
         do {
             randomBossID = ThreadLocalRandom.current().nextInt(0, 110) + 1;
-        } while(bossInUse == randomBossID ||
-                (!playedGames[0] && (randomBossID > 0 && randomBossID <= 22)) ||
-                (!playedGames[1] && (randomBossID > 22 && randomBossID <= 63)) ||
-                (!playedGames[2] && (randomBossID > 63 && randomBossID <= 88)) ||
-                (!playedGames[3] && (randomBossID > 88 && randomBossID <= 110)));
+        } while(bossInUse == randomBossID);
         bossInUse = randomBossID;
         DatabaseReference bossRef = databaseRef.child("bosses/" + randomBossID);
         Log.i("ControllerBoss", "randomID: " + randomBossID);
