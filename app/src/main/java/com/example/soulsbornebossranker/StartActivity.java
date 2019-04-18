@@ -1,6 +1,7 @@
 package com.example.soulsbornebossranker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,16 @@ public class StartActivity extends AppCompatActivity {
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(0).setChecked(true);
+
+        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/OptimusPrincepsSemiBold.ttf");
+        TextView about1 = (TextView) findViewById(R.id.about1);
+        about1.setTypeface(font);
+        TextView about3 = (TextView) findViewById(R.id.about3);
+        about3.setTypeface(font);
+        TextView about5 = (TextView) findViewById(R.id.about5);
+        about5.setTypeface(font);
+        TextView about7 = (TextView) findViewById(R.id.about7);
+        about7.setTypeface(font);
 
         realtimeTextView = (TextView) findViewById(R.id.database_tv);
         setButton = (Button) findViewById(R.id.button);

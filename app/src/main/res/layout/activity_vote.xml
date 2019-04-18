@@ -80,8 +80,9 @@
                             <TextView
                                 android:id="@+id/nameText1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1.0"
+                                android:gravity="center_vertical"
                                 android:maxLines="2"
                                 android:paddingLeft="5dp"
                                 android:textAlignment="textStart"
@@ -109,8 +110,9 @@
                             <TextView
                                 android:id="@+id/nameText2"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1.0"
+                                android:gravity="center_vertical"
                                 android:maxLines="2"
                                 android:paddingLeft="5dp"
                                 android:textAlignment="textStart"
@@ -125,8 +127,15 @@
                         android:id="@+id/skipButton"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_marginStart="4sp"
+                        android:layout_marginTop="4sp"
+                        android:layout_marginEnd="4sp"
+                        android:layout_marginBottom="4sp"
                         android:layout_weight=".2"
-                        android:text="SKIP" />
+                        android:background="@color/colorAccent"
+                        android:elevation="4dp"
+                        android:text="SKIP"
+                        android:textColor="@android:color/darker_gray" />
 
                 </LinearLayout>
 

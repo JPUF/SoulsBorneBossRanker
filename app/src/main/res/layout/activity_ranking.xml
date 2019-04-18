@@ -19,27 +19,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/rankingKey"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/legendLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/ranking_key"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rankingPicker" />
+        app:layout_constraintTop_toBottomOf="@+id/rankingPicker">
+
+        <TextView
+            android:id="@+id/rankTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8sp"
+            android:layout_weight=".35"
+            android:text="#"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/bossTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_weight="1.5"
+            android:text="Boss"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/eloTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8sp"
+            android:layout_weight=".5"
+            android:gravity="end"
+            android:text="Elo"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="8dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rankingKey">
+        app:layout_constraintTop_toBottomOf="@+id/legendLayout"
+        app:layout_constraintVertical_bias="0.657">
 
         <LinearLayout
             android:id="@+id/ranking_layout"

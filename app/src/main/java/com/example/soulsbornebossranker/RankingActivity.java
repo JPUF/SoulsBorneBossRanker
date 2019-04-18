@@ -29,6 +29,7 @@ public class RankingActivity extends AppCompatActivity {
     BottomNavigationView navigation;
     Spinner rankingPicker;
     LinearLayout ranking_layout;
+    Typeface font;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,6 +57,8 @@ public class RankingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
 
         rankingController = new RankingController(this);
+
+        font = Typeface.createFromAsset(getAssets(),"fonts/OptimusPrincepsSemiBold.ttf");
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -159,6 +162,8 @@ public class RankingActivity extends AppCompatActivity {
         LinearLayout.LayoutParams nameParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.85f);
         nameParams.setMargins(8,0,2,0);
         name_tv.setLayoutParams(nameParams);
+        name_tv.setGravity(Gravity.CENTER_VERTICAL);
+        name_tv.setTypeface(font);
         name_tv.setText(boss.name);
         name_tv.setTextColor(Color.WHITE);
         name_tv.setTextSize(12);

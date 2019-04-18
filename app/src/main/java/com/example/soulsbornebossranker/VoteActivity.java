@@ -1,6 +1,7 @@
 package com.example.soulsbornebossranker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -61,9 +62,12 @@ public class VoteActivity extends AppCompatActivity {
         navigation.getMenu().getItem(1).setChecked(true);
         skipButton = findViewById(R.id.skipButton);
 
+        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/OptimusPrincepsSemiBold.ttf");
+
         bossImage1 = findViewById(R.id.bossImage1); bossImage2 = findViewById(R.id.bossImage2);
         gameImage1 = findViewById(R.id.gameImage1); gameImage2 = findViewById(R.id.gameImage2);
         nameText1 = findViewById(R.id.nameText1); nameText2 = findViewById(R.id.nameText2);
+        nameText1.setTypeface(font); nameText2.setTypeface(font);
 
         setCardsToRandomBosses();
 
