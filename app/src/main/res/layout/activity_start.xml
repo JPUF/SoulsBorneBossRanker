@@ -31,6 +31,26 @@
                 android:textColor="@android:color/black"
                 android:textSize="42sp" />
 
+            <ImageView
+                android:id="@+id/dsLogo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40sp"
+                android:layout_marginTop="60sp"
+                android:layout_marginEnd="32sp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/darksoulslogo" />
+
+            <ImageView
+                android:id="@+id/bbLogo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32sp"
+                android:layout_marginEnd="32sp"
+                android:layout_marginBottom="60sp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/bloodbornelogo" />
+
             <TextView
                 android:id="@+id/about3"
                 android:layout_width="match_parent"
