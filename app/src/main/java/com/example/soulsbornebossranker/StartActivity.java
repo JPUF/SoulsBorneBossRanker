@@ -92,6 +92,8 @@ public class StartActivity extends AppCompatActivity {
                 setOnlineDBValues();
             }
         });
+        setButton.setVisibility(View.GONE);
+        realtimeTextView.setVisibility(View.GONE);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

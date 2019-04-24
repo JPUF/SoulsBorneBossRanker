@@ -37,10 +37,11 @@ public class Contest {
 
     private void scoreResultLocal(Context context) {
         final LocalDatabase localDB = LocalDatabase.getInstance(context);
+        Log.i("startupDB", localDB.toString());
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {//on background thread.
-                Boss winnerLocal = localDB.bossDao().loadBoss(winnerOnline.id);
+                Boss winnerLocal = localDB.bossDao().loadBoss(winnerOnline.id);//This is returning null.
                 Boss loserLocal = localDB.bossDao().loadBoss(loserOnline.id);
                 int newPoints[] = eloScore(winnerLocal.points, winnerLocal.points);
                 localDB.bossDao().updateBoss(winnerLocal.id, newPoints[0]);

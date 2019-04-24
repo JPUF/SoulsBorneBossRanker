@@ -11,14 +11,14 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="64dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/navigation">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/about1"
@@ -34,7 +34,7 @@
                 android:id="@+id/dsLogo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40sp"
+                android:layout_marginStart="35sp"
                 android:layout_marginTop="60sp"
                 android:layout_marginEnd="32sp"
                 android:adjustViewBounds="true"

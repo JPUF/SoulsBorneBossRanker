@@ -11,7 +11,7 @@
 
         <activity
             android:name=".StartActivity"
-            android:label="@string/title_activity_start">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,7 +20,7 @@
 
         <activity
             android:name=".VoteActivity"
-            android:label="@string/title_activity_main">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
@@ -28,7 +28,7 @@
 
         <activity
             android:name=".RankingActivity"
-            android:label="@string/title_activity_ranking">
+            android:label="@string/app_name">
         </activity>
     </application>
 
