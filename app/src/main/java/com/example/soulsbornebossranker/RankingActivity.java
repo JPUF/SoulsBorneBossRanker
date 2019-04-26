@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -24,10 +25,16 @@ import java.util.List;
 public class RankingActivity extends AppCompatActivity {
     //TODO views in a Recycler instead?
 
+    private enum Ranking {
+        GLOBAL, PERSONAL
+    }
+
     RankingController rankingController;
 
     BottomNavigationView navigation;
-    Spinner rankingPicker;
+    Button personalButton;
+    Button globalButton;
+    ImageView arrow;
     LinearLayout ranking_layout;
     Typeface font;
 
@@ -64,27 +71,44 @@ public class RankingActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(2).setChecked(true);
 
-        rankingPicker = (Spinner) findViewById(R.id.rankingPicker);
+        personalButton = (Button) findViewById(R.id.personalButton);
+        globalButton = (Button) findViewById(R.id.globalButton);
+        arrow = (ImageView) findViewById(R.id.arrow);
         ranking_layout = (LinearLayout) findViewById(R.id.ranking_layout);
 
-        rankingPicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                if(selectedItem.equals("Personal rankings"))
-                {
-                    populateTableFromLocal();
-                }
-                else if (selectedItem.equals("Global rankings")) {
-                    populateTableFromFirebase();
-                }
-            }
+        displayRankings(Ranking.GLOBAL);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                populateTableFromLocal();
+        personalButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                displayRankings(Ranking.PERSONAL);
             }
         });
+
+        globalButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                displayRankings(Ranking.GLOBAL);
+            }
+        });
+    }
+
+    private void displayRankings(Ranking ranking) {
+        if(ranking == Ranking.GLOBAL){
+            populateTableFromFirebase();
+            arrow.setRotation(180);
+            personalButton.setBackgroundColor(Color.BLACK);
+            personalButton.setTextColor(Color.WHITE);
+            globalButton.setBackgroundColor(Color.WHITE);
+            globalButton.setTextColor(Color.BLACK);
+        }
+        else if(ranking == Ranking.PERSONAL) {
+            populateTableFromLocal();
+            arrow.setRotation(0);
+
+            globalButton.setBackgroundColor(Color.BLACK);
+            globalButton.setTextColor(Color.WHITE);
+            personalButton.setBackgroundColor(Color.WHITE);
+            personalButton.setTextColor(Color.BLACK);
+        }
     }
 
     private void populateTableFromFirebase() {
