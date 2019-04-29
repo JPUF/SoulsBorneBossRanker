@@ -104,6 +104,13 @@
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/globe" />
 
+            <ImageView
+                android:id="@+id/about8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/disclaimer" />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
