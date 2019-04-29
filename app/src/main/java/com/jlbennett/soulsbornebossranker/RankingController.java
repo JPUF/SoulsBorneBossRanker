@@ -1,6 +1,5 @@
-package com.example.soulsbornebossranker;
+package com.jlbennett.soulsbornebossranker;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;

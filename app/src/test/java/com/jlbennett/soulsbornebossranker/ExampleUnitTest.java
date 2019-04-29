@@ -1,4 +1,4 @@
-package com.example.soulsbornebossranker;
+package com.jlbennett.soulsbornebossranker;
 
 import org.junit.Test;
 

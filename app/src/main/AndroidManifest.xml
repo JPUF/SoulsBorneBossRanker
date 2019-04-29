@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.soulsbornebossranker">
+    package="com.jlbennett.soulsbornebossranker">
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".StartActivity"
+            android:name="com.jlbennett.soulsbornebossranker.StartActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".VoteActivity"
+            android:name="com.jlbennett.soulsbornebossranker.VoteActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
@@ -28,7 +28,7 @@
         </activity>
 
         <activity
-            android:name=".RankingActivity"
+            android:name="com.jlbennett.soulsbornebossranker.RankingActivity"
             android:label="@string/app_name">
         </activity>
     </application>

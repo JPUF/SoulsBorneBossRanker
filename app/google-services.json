@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:960945308118:android:b342f1183d39fec5",
         "android_client_info": {
-          "package_name": "com.example.soulsbornebossranker"
+          "package_name": "com.jlbennett.soulsbornebossranker"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "960945308118-85ueup12ullohr746afkdsc4ec1i8j2i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.soulsbornebossranker",
+            "package_name": "com.jlbennett.soulsbornebossranker",
             "certificate_hash": "2fc85ce69bf7514c12e1d0afaf1b12ec4b206769"
           }
         }

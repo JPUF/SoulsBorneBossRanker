@@ -1,4 +1,4 @@
-package com.example.soulsbornebossranker;
+package com.jlbennett.soulsbornebossranker;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -27,6 +27,7 @@ public class StartActivity extends AppCompatActivity {
     //TODO change implementation so local rankings can be done without internet connection.
     //TODO reduce what's stored online. Only really need to store boss ID and points online I think.
     //TODO on first start, nothing shows for personal rankings. This could be okay, because stuff does show after you vote.
+    //TODO reduce minSdkVersion
 
     BottomNavigationView navigation;
 

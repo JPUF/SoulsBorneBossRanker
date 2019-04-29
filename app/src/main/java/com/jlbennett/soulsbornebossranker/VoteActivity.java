@@ -1,4 +1,4 @@
-package com.example.soulsbornebossranker;
+package com.jlbennett.soulsbornebossranker;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -107,7 +107,7 @@ public class VoteActivity extends AppCompatActivity {
 
         try {
             String pathString = boss.imagePath.substring(0, boss.imagePath.length()-4);
-            Uri uri = Uri.parse("android.resource://com.example.soulsbornebossranker/drawable/" + pathString);
+            Uri uri = Uri.parse("android.resource://com.jlbennett.soulsbornebossranker/drawable/" + pathString);
             bossImage1.setImageURI(uri);
         }
         catch (Exception e) {
@@ -129,7 +129,7 @@ public class VoteActivity extends AppCompatActivity {
 
         try {
             String pathString = boss.imagePath.substring(0, boss.imagePath.length()-4);
-            Uri uri = Uri.parse("android.resource://com.example.soulsbornebossranker/drawable/" + pathString);
+            Uri uri = Uri.parse("android.resource://com.jlbennett.soulsbornebossranker/drawable/" + pathString);
             bossImage2.setImageURI(uri);
         }
         catch (Exception e) {

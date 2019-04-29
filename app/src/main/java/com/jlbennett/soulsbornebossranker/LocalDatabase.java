@@ -1,4 +1,4 @@
-package com.example.soulsbornebossranker;
+package com.jlbennett.soulsbornebossranker;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
