@@ -30,7 +30,6 @@ public class VoteController {
         void DataIsLoaded(Boss upperBoss);
     }
 
-    //TODO pick random boss value, then filter out if it shouldn't be picked.
     public void readRandomBoss(final DataStatus dataStatus) {
         int randomBossID;
         do {
@@ -42,8 +41,7 @@ public class VoteController {
         bossRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Boss b = dataSnapshot.getValue(Boss.class);
-                boss = b;
+                boss = dataSnapshot.getValue(Boss.class);
                 dataStatus.DataIsLoaded(boss);
             }
 
