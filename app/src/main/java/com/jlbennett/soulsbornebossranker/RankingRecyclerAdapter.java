@@ -33,10 +33,19 @@ public class RankingRecyclerAdapter extends RecyclerView.Adapter<RankingRecycler
     public void onBindViewHolder(RowViewHolder rowViewHolder, int i) {
         Integer iI = i + 1;
         rowViewHolder.rankTV.setText(iI.toString());
-        rowViewHolder.gameIV.setImageResource(R.drawable.ds1);
-        //rowViewHolder.nameTV.setText(bosses.get(i).name);
-        rowViewHolder.nameTV.setText("D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n D n");
-        rowViewHolder.eloTV.setText("1000");
+        String game = bosses.get(i).game;
+        if(game.contains("ds1"))
+            rowViewHolder.gameIV.setImageResource(R.drawable.ds1);
+        else if(game.contains("ds2"))
+            rowViewHolder.gameIV.setImageResource(R.drawable.ds2);
+        else if(game.contains("ds3"))
+            rowViewHolder.gameIV.setImageResource(R.drawable.ds3);
+        else if(game.contains("bb"))
+            rowViewHolder.gameIV.setImageResource(R.drawable.bb);
+
+        rowViewHolder.nameTV.setText(bosses.get(i).name);
+        Integer points = bosses.get(i).points;
+        rowViewHolder.eloTV.setText(points.toString());
     }
 
     @Override

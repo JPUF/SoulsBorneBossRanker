@@ -83,15 +83,18 @@ public class RankingActivity extends AppCompatActivity {
         llm = new LinearLayoutManager(getApplicationContext());
         rankingRecycler.setLayoutManager(llm);
 
+        /*
         List<Boss> bosses = new ArrayList<>();
         for(int i = 0; i < 110; i++){
             bosses.add(new Boss("Boss 1", 1, "ds1", "bedofchaos.jpg", 1000));
         }
 
+
         RankingRecyclerAdapter adapter = new RankingRecyclerAdapter(bosses);
         rankingRecycler.setAdapter(adapter);
+        */
 
-        /*
+
         displayRankings(Ranking.GLOBAL);
 
         personalButton.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +108,9 @@ public class RankingActivity extends AppCompatActivity {
                 displayRankings(Ranking.GLOBAL);
             }
         });
-        */
     }
 
-    /*
+
     private void displayRankings(Ranking ranking) {
         if(ranking == Ranking.GLOBAL){
             populateTableFromFirebase();
@@ -131,29 +133,22 @@ public class RankingActivity extends AppCompatActivity {
 
 
     private void populateTableFromFirebase() {
-        ranking_layout.removeAllViews();
         rankingController.readAllBossesFromFirebase(new RankingController.DataStatus() {
             @Override
             public void DataIsLoaded(ArrayList<Boss> bosses) {
-                int rank = 1;
-                for(Boss boss : bosses) {
-                    ranking_layout.addView(createRow(boss, rank++));
-                }
+                RankingRecyclerAdapter adapter = new RankingRecyclerAdapter(bosses);
+                rankingRecycler.setAdapter(adapter);
             }
         });
     }
 
     private void populateTableFromLocal() {
-        ranking_layout.removeAllViews();
         rankingController.readAllBossesFromLocal(getApplicationContext());
     }
 
     public void populateTableFromList(List<Boss> bosses) {
-        ranking_layout.removeAllViews();
-        int rank = 1;
-        for(Boss boss : bosses) {
-            ranking_layout.addView(createRow(boss, rank++));
-        }
+        RankingRecyclerAdapter adapter = new RankingRecyclerAdapter(bosses);
+        rankingRecycler.setAdapter(adapter);
     }
 
     public LinearLayout createRow(Boss boss, Integer rank) {
@@ -232,7 +227,7 @@ public class RankingActivity extends AppCompatActivity {
 
         return outer_ll;
     }
-    */
+
 
     public void startMain() {
         Intent intent = new Intent(this, VoteActivity.class);

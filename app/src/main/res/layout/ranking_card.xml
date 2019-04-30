@@ -23,7 +23,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:paddingStart="4sp"
-                android:gravity="center_vertical"/>
+                android:gravity="center"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -58,11 +58,10 @@
                     android:id="@+id/eloTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
+                    android:layout_weight="0.15"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:gravity="end"
-                    android:textAlignment="textEnd"
+                    android:textSize="14sp"
+                    android:layout_gravity="center_vertical"
                     android:paddingEnd="4sp"/>
 
             </LinearLayout>
