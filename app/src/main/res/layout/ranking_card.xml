@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="4sp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/rowCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000">
+
+            <TextView
+                android:id="@+id/rankTV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.11"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingStart="4sp"
+                android:gravity="center_vertical"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.95"
+                android:orientation="horizontal"
+                android:background="#000000">
+
+                <ImageView
+                    android:id="@+id/gameIV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.11"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:id="@+id/nameTV"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.80"
+                    android:layout_marginStart="8sp"
+                    android:layout_marginEnd="2sp"
+                    android:gravity="center_vertical"
+                    android:textAppearance="@font/palanquin_dark_semibold"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:maxLines="2"/>
+
+                <TextView
+                    android:id="@+id/eloTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="end"
+                    android:textAlignment="textEnd"
+                    android:paddingEnd="4sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

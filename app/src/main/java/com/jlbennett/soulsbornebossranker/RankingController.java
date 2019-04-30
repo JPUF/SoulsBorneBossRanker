@@ -76,7 +76,7 @@ public class RankingController {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        activity.populateTableFromList(sortedBosses);//on UI thread.
+                        //activity.populateTableFromList(sortedBosses);//on UI thread.
                     }
                 });
             }

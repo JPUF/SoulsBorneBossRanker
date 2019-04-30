@@ -9,6 +9,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +35,10 @@ public class RankingActivity extends AppCompatActivity {
     Button personalButton;
     Button globalButton;
     ImageView arrow;
-    LinearLayout ranking_layout;
+
+    RecyclerView rankingRecycler;
+    LinearLayoutManager llm;
+
     Typeface font;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -72,8 +77,21 @@ public class RankingActivity extends AppCompatActivity {
         personalButton = (Button) findViewById(R.id.personalButton);
         globalButton = (Button) findViewById(R.id.globalButton);
         arrow = (ImageView) findViewById(R.id.arrow);
-        ranking_layout = (LinearLayout) findViewById(R.id.ranking_layout);
 
+        rankingRecycler = (RecyclerView) findViewById(R.id.rankingRecycler);
+        rankingRecycler.setHasFixedSize(true);//suspect
+        llm = new LinearLayoutManager(getApplicationContext());
+        rankingRecycler.setLayoutManager(llm);
+
+        List<Boss> bosses = new ArrayList<>();
+        for(int i = 0; i < 110; i++){
+            bosses.add(new Boss("Boss 1", 1, "ds1", "bedofchaos.jpg", 1000));
+        }
+
+        RankingRecyclerAdapter adapter = new RankingRecyclerAdapter(bosses);
+        rankingRecycler.setAdapter(adapter);
+
+        /*
         displayRankings(Ranking.GLOBAL);
 
         personalButton.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +105,10 @@ public class RankingActivity extends AppCompatActivity {
                 displayRankings(Ranking.GLOBAL);
             }
         });
+        */
     }
 
+    /*
     private void displayRankings(Ranking ranking) {
         if(ranking == Ranking.GLOBAL){
             populateTableFromFirebase();
@@ -108,6 +128,7 @@ public class RankingActivity extends AppCompatActivity {
             personalButton.setTextColor(Color.BLACK);
         }
     }
+
 
     private void populateTableFromFirebase() {
         ranking_layout.removeAllViews();
@@ -211,6 +232,7 @@ public class RankingActivity extends AppCompatActivity {
 
         return outer_ll;
     }
+    */
 
     public void startMain() {
         Intent intent = new Intent(this, VoteActivity.class);
