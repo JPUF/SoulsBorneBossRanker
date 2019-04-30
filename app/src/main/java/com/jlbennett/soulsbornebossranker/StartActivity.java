@@ -28,6 +28,9 @@ public class StartActivity extends AppCompatActivity {
     //TODO reduce what's stored online. Only really need to store boss ID and points online I think.
     //TODO on first start, nothing shows for personal rankings. This could be okay, because stuff does show after you vote.
     //TODO reduce minSdkVersion
+    //TODO change disclaimer to TextView.
+    //TODO taurus demon
+    //TODO re-test. Added more checks, so maybe it won't crash now? 
 
     BottomNavigationView navigation;
 
