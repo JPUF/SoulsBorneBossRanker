@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresPermission;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -14,6 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,12 +21,12 @@ import java.util.List;
 
 public class RankingController {
 
-    private RankingActivity activity;//TODO storing this reference is dodgy, quite possibly causing leaks.
+    private WeakReference<RankingActivity> activityRef;//TODO storing this reference is dodgy, quite possibly causing leaks.
     private DatabaseReference databaseRef;
     private ArrayList<Boss> bosses = new ArrayList<>();
 
     public RankingController(RankingActivity activity) {
-        this.activity = activity;
+        this.activityRef = new WeakReference<RankingActivity>(activity);
         databaseRef = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -65,7 +65,7 @@ public class RankingController {
         @Override
         protected Void doInBackground(Object... params) {
             final LocalDatabase localDB = (LocalDatabase) params[0];
-            final RankingActivity activity = (RankingActivity) params[1];
+            final WeakReference<RankingActivity> activityRef = (WeakReference<RankingActivity>) params[1];
 
             List<Boss> bosses = localDB.bossDao().getAll();//on background thread.
             Collections.sort(bosses, new Comparator<Boss>() {
@@ -79,7 +79,7 @@ public class RankingController {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
-                    activity.populateTableFromList(sortedBosses);//on UI thread.
+                    activityRef.get().populateTableFromList(sortedBosses);//on UI thread.
                 }
             });
 
@@ -89,6 +89,6 @@ public class RankingController {
 
     public void readAllBossesFromLocal(final Context context) {
         final LocalDatabase localDB = LocalDatabase.getInstance(context);
-        new ReadLocalTask().execute(localDB, activity);
+        new ReadLocalTask().execute(localDB, activityRef);
     }
 }
