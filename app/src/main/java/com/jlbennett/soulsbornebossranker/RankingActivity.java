@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -155,10 +156,19 @@ public class RankingActivity extends AppCompatActivity {
     public void startMain() {
         Intent intent = new Intent(this, VoteActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void startAbout() {
         Intent intent = new Intent(this, StartActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        Log.i("ActivityDestroy", "onDestroy - RankingActivity");
     }
 }

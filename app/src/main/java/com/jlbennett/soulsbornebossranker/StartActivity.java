@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -245,10 +246,19 @@ public class StartActivity extends AppCompatActivity {
     public void startVote() {
         Intent intent = new Intent(this, VoteActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void startRanking() {
         Intent intent = new Intent(this, RankingActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        Log.i("ActivityDestroy", "onDestroy - StartActivity");
     }
 }

@@ -84,6 +84,7 @@ public class VoteActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setCardsToRandomBosses();
+                System.gc();
             }
         });
 
@@ -93,6 +94,7 @@ public class VoteActivity extends AppCompatActivity {
                     new Contest(context, upperBoss, lowerBoss);
                 }
                 setCardsToRandomBosses();
+                System.gc();
             }
         });
 
@@ -102,6 +104,7 @@ public class VoteActivity extends AppCompatActivity {
                     new Contest(context, lowerBoss, upperBoss);
                 }
                 setCardsToRandomBosses();
+                System.gc();
             }
         });
     }
@@ -109,6 +112,7 @@ public class VoteActivity extends AppCompatActivity {
     public void setUpperBoss(Boss boss) {
         upperBoss = boss;
         nameText1.setText(boss.name);
+
         if(boss.game.contains("ds1"))
             gameImage1.setImageResource(R.drawable.ds1);
         else if (boss.game.contains("ds2"))
@@ -121,12 +125,11 @@ public class VoteActivity extends AppCompatActivity {
         try {
             String pathString = boss.imagePath.substring(0, boss.imagePath.length()-4);
             pathString = "android.resource://com.jlbennett.soulsbornebossranker/drawable/" + pathString;
-            //Picasso.get().load(pathString).into(bossImage1);
             Picasso.get().load(pathString)
                          .error(R.drawable.internet)
                          .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                          .into(bossImage1);
-            //bossImage1.setImageDrawable(null);
+
         }
         catch (Exception e) {
             Log.e("ImageView", e.toString());
@@ -148,12 +151,11 @@ public class VoteActivity extends AppCompatActivity {
         try {
             String pathString = boss.imagePath.substring(0, boss.imagePath.length()-4);
             pathString = "android.resource://com.jlbennett.soulsbornebossranker/drawable/" + pathString;
-            //Picasso.get().load(pathString).into(bossImage2);
+
             Picasso.get().load(pathString)
                     .error(R.drawable.internet)
                     .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                     .into(bossImage2);
-            //bossImage2.setImageDrawable(null);
         }
         catch (Exception e) {
             Log.e("ImageView", e.toString());
@@ -178,10 +180,12 @@ public class VoteActivity extends AppCompatActivity {
     public void startAbout() {
         Intent intent = new Intent(this, StartActivity.class);
         startActivity(intent);
+        finish();
     }
     public void startRanking() {
         Intent intent = new Intent(this, RankingActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -190,5 +194,9 @@ public class VoteActivity extends AppCompatActivity {
 
         bossImage1.setImageDrawable(null);
         bossImage2.setImageDrawable(null);
+
+        System.gc();
+
+        Log.i("ActivityDestroy", "onDestroy - VoteActivity");
     }
 }
