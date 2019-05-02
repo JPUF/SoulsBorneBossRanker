@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresPermission;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class RankingController {
 
-    private RankingActivity activity;
+    private RankingActivity activity;//TODO storing this reference is dodgy, quite possibly causing leaks.
     private DatabaseReference databaseRef;
     private ArrayList<Boss> bosses = new ArrayList<>();
 
@@ -59,27 +60,35 @@ public class RankingController {
         });
     }
 
+    private static class ReadLocalTask extends AsyncTask<Object, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Object... params) {
+            final LocalDatabase localDB = (LocalDatabase) params[0];
+            final RankingActivity activity = (RankingActivity) params[1];
+
+            List<Boss> bosses = localDB.bossDao().getAll();//on background thread.
+            Collections.sort(bosses, new Comparator<Boss>() {
+                @Override
+                public int compare(Boss b1, Boss b2) {
+                    return b2.points - b1.points;
+                }
+            });
+            final List<Boss> sortedBosses = bosses;
+
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    activity.populateTableFromList(sortedBosses);//on UI thread.
+                }
+            });
+
+            return null;
+        }
+    }
+
     public void readAllBossesFromLocal(final Context context) {
         final LocalDatabase localDB = LocalDatabase.getInstance(context);
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                List<Boss> bosses = localDB.bossDao().getAll();//on background thread.
-                Collections.sort(bosses, new Comparator<Boss>() {
-                    @Override
-                    public int compare(Boss b1, Boss b2) {
-                        return b2.points - b1.points;
-                    }
-                }); 
-                final List<Boss> sortedBosses = bosses;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        activity.populateTableFromList(sortedBosses);//on UI thread.
-                    }
-                });
-            }
-        });
+        new ReadLocalTask().execute(localDB, activity);
     }
 }

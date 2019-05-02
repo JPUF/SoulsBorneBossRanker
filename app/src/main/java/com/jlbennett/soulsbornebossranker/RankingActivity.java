@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {
-    //TODO views in a Recycler instead?
 
     private enum Ranking {
         GLOBAL, PERSONAL

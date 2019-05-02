@@ -39,26 +39,33 @@ public class Contest {
         bossRef.child("points").setValue(loserOnline.points);
     }
 
-    private void scoreResultLocal() {
-        Log.i("startupDB", localDB.toString());
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {//on background thread.
-                try {
-                    Boss winnerLocal = localDB.get().bossDao().loadBoss(winnerOnline.id);
-                    Boss loserLocal = localDB.get().bossDao().loadBoss(loserOnline.id);
-                    int newPoints[] = eloScore(winnerLocal.points, winnerLocal.points);
-                    localDB.get().bossDao().updateBoss(winnerLocal.id, newPoints[0]);
-                    localDB.get().bossDao().updateBoss(loserLocal.id, newPoints[1]);
-                }
-                catch (NullPointerException e) {
-                    Log.e("Contest", "error reading from local database");
-                }
+    private static class LocalStorageTask extends AsyncTask<Object, Void, Void> {
+        @Override
+        protected Void doInBackground(Object... params) {//on background thread.
+            try {
+                LocalDatabase localDB = (LocalDatabase) params[0];
+                Integer winnerID = (Integer) params[1];
+                Integer loserID = (Integer) params[2];
+                Boss winnerLocal = localDB.bossDao().loadBoss(winnerID);
+                Boss loserLocal = localDB.bossDao().loadBoss(loserID);
+                int newPoints[] = eloScore(winnerLocal.points, winnerLocal.points);
+                localDB.bossDao().updateBoss(winnerLocal.id, newPoints[0]);
+                localDB.bossDao().updateBoss(loserLocal.id, newPoints[1]);
             }
-        });
+            catch (NullPointerException e) {
+                Log.e("Contest", "error reading from local database");
+            }
+            return null;
+        }
     }
 
-    private int[] eloScore(int winnerPoints, int loserPoints) {
+    private void scoreResultLocal() {
+        Log.i("startupDB", localDB.toString());
+        LocalDatabase localDatabaseRef = localDB.get();//could try getting as a weak reference, pass that to Task.
+        new LocalStorageTask().execute(localDatabaseRef, winnerOnline.id, loserOnline.id);//probs try catch.
+    }
+
+    private static int[] eloScore(int winnerPoints, int loserPoints) {
         double qWinner = Math.pow(10,((double) winnerPoints / 400.0d));
         double qLoser = Math.pow(10,((double) loserPoints / 400.0d));
         double expectedWinner = qWinner / (qWinner + qLoser);
