@@ -44,6 +44,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.75"
                     android:adjustViewBounds="true"
+                    android:contentDescription="Image of the first boss."
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/blank" />
 
@@ -146,6 +147,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.75"
                     android:adjustViewBounds="true"
+                    android:contentDescription="Image of the second boss"
                     android:cropToPadding="false"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/blank" />

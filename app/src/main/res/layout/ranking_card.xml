@@ -20,10 +20,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.11"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
+                android:contentDescription="Rank of this boss."
+                android:gravity="center"
                 android:paddingStart="4sp"
-                android:gravity="center"/>
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -38,8 +39,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.11"
                     android:adjustViewBounds="true"
+                    android:contentDescription="The game this boss belongs to."
                     android:cropToPadding="true"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/nameTV"
@@ -58,11 +60,12 @@
                     android:id="@+id/eloTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.15"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
-                    android:paddingEnd="4sp"/>
+                    android:layout_weight="0.15"
+                    android:contentDescription="The number of points this boss has."
+                    android:paddingEnd="4sp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
