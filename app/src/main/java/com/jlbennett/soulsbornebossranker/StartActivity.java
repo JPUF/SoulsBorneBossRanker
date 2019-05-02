@@ -29,8 +29,9 @@ public class StartActivity extends AppCompatActivity {
     //TODO on first start, nothing shows for personal rankings. This could be okay, because stuff does show after you vote.
     //TODO reduce minSdkVersion
     //TODO change disclaimer to TextView.
-    //TODO taurus demon
-    //TODO re-test. Added more checks, so maybe it won't crash now? 
+    //TODO taurus demon, Seath. Just check all the bosses
+    //TODO still crashing, null pointer stuff in Contest
+    //TODO Memory leaks caused by storing CONTEXT on background threads.
 
     BottomNavigationView navigation;
 

@@ -1,7 +1,11 @@
 package com.jlbennett.soulsbornebossranker;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,10 +20,15 @@ import android.widget.TextView;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.PicassoProvider;
+
+import java.io.File;
 
 public class VoteActivity extends AppCompatActivity {
 
-    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+    Context context;
     VoteController voteController;
     BottomNavigationView navigation;
     Button skipButton;
@@ -55,6 +64,7 @@ public class VoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
+        context = getApplicationContext();
         voteController = new VoteController();
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -80,7 +90,7 @@ public class VoteActivity extends AppCompatActivity {
         bossImage1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(upperBoss != null && lowerBoss != null) {
-                    new Contest(getApplicationContext(), upperBoss, lowerBoss);
+                    new Contest(context, upperBoss, lowerBoss);
                 }
                 setCardsToRandomBosses();
             }
@@ -89,7 +99,7 @@ public class VoteActivity extends AppCompatActivity {
         bossImage2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(lowerBoss != null && upperBoss != null) {
-                    new Contest(getApplicationContext(), lowerBoss, upperBoss);
+                    new Contest(context, lowerBoss, upperBoss);
                 }
                 setCardsToRandomBosses();
             }
@@ -110,8 +120,13 @@ public class VoteActivity extends AppCompatActivity {
 
         try {
             String pathString = boss.imagePath.substring(0, boss.imagePath.length()-4);
-            Uri uri = Uri.parse("android.resource://com.jlbennett.soulsbornebossranker/drawable/" + pathString);
-            bossImage1.setImageURI(uri);
+            pathString = "android.resource://com.jlbennett.soulsbornebossranker/drawable/" + pathString;
+            //Picasso.get().load(pathString).into(bossImage1);
+            Picasso.get().load(pathString)
+                         .error(R.drawable.internet)
+                         .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                         .into(bossImage1);
+            //bossImage1.setImageDrawable(null);
         }
         catch (Exception e) {
             Log.e("ImageView", e.toString());
@@ -132,8 +147,13 @@ public class VoteActivity extends AppCompatActivity {
 
         try {
             String pathString = boss.imagePath.substring(0, boss.imagePath.length()-4);
-            Uri uri = Uri.parse("android.resource://com.jlbennett.soulsbornebossranker/drawable/" + pathString);
-            bossImage2.setImageURI(uri);
+            pathString = "android.resource://com.jlbennett.soulsbornebossranker/drawable/" + pathString;
+            //Picasso.get().load(pathString).into(bossImage2);
+            Picasso.get().load(pathString)
+                    .error(R.drawable.internet)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                    .into(bossImage2);
+            //bossImage2.setImageDrawable(null);
         }
         catch (Exception e) {
             Log.e("ImageView", e.toString());
@@ -162,5 +182,13 @@ public class VoteActivity extends AppCompatActivity {
     public void startRanking() {
         Intent intent = new Intent(this, RankingActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        bossImage1.setImageDrawable(null);
+        bossImage2.setImageDrawable(null);
     }
 }

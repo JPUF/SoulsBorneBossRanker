@@ -8,20 +8,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.Math;
+import java.lang.ref.WeakReference;
 
 public class Contest {
 
     private DatabaseReference databaseRef;
+    //private LocalDatabase localDB;
+    private final WeakReference<LocalDatabase> localDB;
 
     private Boss winnerOnline;
     private Boss loserOnline;
 
     public Contest(Context context, Boss winner, Boss loser) {
         databaseRef = FirebaseDatabase.getInstance().getReference();
+        //localDB = LocalDatabase.getInstance(context);
+        this.localDB = new WeakReference<>(LocalDatabase.getInstance(context));
         this.winnerOnline = winner;
         this.loserOnline = loser;
         scoreResultOnline();
-        scoreResultLocal(context);
+        scoreResultLocal();
     }
 
     private void scoreResultOnline() {
@@ -34,17 +39,21 @@ public class Contest {
         bossRef.child("points").setValue(loserOnline.points);
     }
 
-    private void scoreResultLocal(Context context) {
-        final LocalDatabase localDB = LocalDatabase.getInstance(context);
+    private void scoreResultLocal() {
         Log.i("startupDB", localDB.toString());
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {//on background thread.
-                Boss winnerLocal = localDB.bossDao().loadBoss(winnerOnline.id);//This is returning null.
-                Boss loserLocal = localDB.bossDao().loadBoss(loserOnline.id);
-                int newPoints[] = eloScore(winnerLocal.points, winnerLocal.points);
-                localDB.bossDao().updateBoss(winnerLocal.id, newPoints[0]);
-                localDB.bossDao().updateBoss(loserLocal.id, newPoints[1]);
+                try {
+                    Boss winnerLocal = localDB.get().bossDao().loadBoss(winnerOnline.id);
+                    Boss loserLocal = localDB.get().bossDao().loadBoss(loserOnline.id);
+                    int newPoints[] = eloScore(winnerLocal.points, winnerLocal.points);
+                    localDB.get().bossDao().updateBoss(winnerLocal.id, newPoints[0]);
+                    localDB.get().bossDao().updateBoss(loserLocal.id, newPoints[1]);
+                }
+                catch (NullPointerException e) {
+                    Log.e("Contest", "error reading from local database");
+                }
             }
         });
     }

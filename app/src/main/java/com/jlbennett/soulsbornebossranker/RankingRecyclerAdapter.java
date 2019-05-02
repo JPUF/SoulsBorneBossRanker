@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class RankingRecyclerAdapter extends RecyclerView.Adapter<RankingRecyclerAdapter.RowViewHolder>{
@@ -35,13 +38,13 @@ public class RankingRecyclerAdapter extends RecyclerView.Adapter<RankingRecycler
         rowViewHolder.rankTV.setText(iI.toString());
         String game = bosses.get(i).game;
         if(game.contains("ds1"))
-            rowViewHolder.gameIV.setImageResource(R.drawable.ds1);
+            Picasso.get().load(R.drawable.ds1).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(rowViewHolder.gameIV);
         else if(game.contains("ds2"))
-            rowViewHolder.gameIV.setImageResource(R.drawable.ds2);
+            Picasso.get().load(R.drawable.ds2).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(rowViewHolder.gameIV);
         else if(game.contains("ds3"))
-            rowViewHolder.gameIV.setImageResource(R.drawable.ds3);
+            Picasso.get().load(R.drawable.ds3).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(rowViewHolder.gameIV);
         else if(game.contains("bb"))
-            rowViewHolder.gameIV.setImageResource(R.drawable.bb);
+            Picasso.get().load(R.drawable.bb).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(rowViewHolder.gameIV);
 
         rowViewHolder.nameTV.setText(bosses.get(i).name);
         Integer points = bosses.get(i).points;
