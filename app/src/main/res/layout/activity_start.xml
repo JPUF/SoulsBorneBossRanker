@@ -111,6 +111,21 @@
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/disclaimer" />
 
+            <TextView
+                android:id="@+id/about9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:linksClickable="true"
+                android:paddingStart="10sp"
+                android:paddingTop="20sp"
+                android:paddingBottom="20sp"
+                android:textColor="@android:color/black"
+                android:textColorLink="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

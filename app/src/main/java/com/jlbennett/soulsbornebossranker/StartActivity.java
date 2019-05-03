@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,6 +67,10 @@ public class StartActivity extends AppCompatActivity {
         about5.setTypeface(font);
         TextView about7 = (TextView) findViewById(R.id.about7);
         about7.setTypeface(font);
+        TextView about9 = (TextView) findViewById(R.id.about9);
+        about9.setMovementMethod(LinkMovementMethod.getInstance());
+        String text = "<a href='https://github.com/JPUF/SoulsBorneBossRanker/wiki/Privacy-Policy'> Read this app's Privacy Policy </a>";
+        about9.setText(Html.fromHtml(text));
 
         realtimeTextView = (TextView) findViewById(R.id.database_tv);
         setButton = (Button) findViewById(R.id.button);
