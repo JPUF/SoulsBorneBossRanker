@@ -114,22 +114,30 @@ public class RankingActivity extends AppCompatActivity {
 
 
     private void displayRankings(Ranking ranking) {
+        int lightColor = Color.LTGRAY;
+        int darkColor = Color.DKGRAY;
+        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/OptimusPrincepsSemiBold.ttf");
         if(ranking == Ranking.GLOBAL){
             populateTableFromFirebase();
             arrow.setRotation(180);
-            personalButton.setBackgroundColor(Color.BLACK);
-            personalButton.setTextColor(Color.WHITE);
-            globalButton.setBackgroundColor(Color.WHITE);
-            globalButton.setTextColor(Color.BLACK);
+
+            personalButton.setBackgroundColor(lightColor);
+            personalButton.setTextColor(Color.BLACK);
+            globalButton.setBackgroundColor(darkColor);
+            globalButton.setTextColor(Color.WHITE);
+            personalButton.setTypeface(font);
+            globalButton.setTypeface(font);
         }
         else if(ranking == Ranking.PERSONAL) {
             populateTableFromLocal();
             arrow.setRotation(0);
 
-            globalButton.setBackgroundColor(Color.BLACK);
-            globalButton.setTextColor(Color.WHITE);
-            personalButton.setBackgroundColor(Color.WHITE);
-            personalButton.setTextColor(Color.BLACK);
+            globalButton.setBackgroundColor(lightColor);
+            globalButton.setTextColor(Color.BLACK);
+            personalButton.setBackgroundColor(darkColor);
+            personalButton.setTextColor(Color.WHITE);
+            personalButton.setTypeface(font);
+            globalButton.setTypeface(font);
         }
     }
 
