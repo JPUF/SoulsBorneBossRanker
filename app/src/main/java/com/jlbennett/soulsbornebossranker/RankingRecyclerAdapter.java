@@ -12,14 +12,18 @@ import android.widget.TextView;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class RankingRecyclerAdapter extends RecyclerView.Adapter<RankingRecyclerAdapter.RowViewHolder>{
 
     List<Boss> bosses;
+    WeakReference<Typeface> fontRef;
 
-    RankingRecyclerAdapter(List<Boss> bosses){
+    RankingRecyclerAdapter(List<Boss> bosses, Typeface font){
         this.bosses = bosses;
+        this.fontRef = new WeakReference<>(font);
     }
 
     @Override
@@ -48,6 +52,7 @@ public class RankingRecyclerAdapter extends RecyclerView.Adapter<RankingRecycler
             Picasso.get().load(R.drawable.bb).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(rowViewHolder.gameIV);
 
         rowViewHolder.nameTV.setText(bosses.get(i).name);
+        rowViewHolder.nameTV.setTypeface(fontRef.get());
         Integer points = bosses.get(i).points;
         rowViewHolder.eloTV.setText(points.toString());
     }

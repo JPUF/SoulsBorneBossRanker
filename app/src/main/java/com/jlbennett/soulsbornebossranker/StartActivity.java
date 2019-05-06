@@ -69,7 +69,7 @@ public class StartActivity extends AppCompatActivity {
         about7.setTypeface(font);
         TextView about9 = (TextView) findViewById(R.id.about9);
         about9.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='https://github.com/JPUF/SoulsBorneBossRanker/wiki/Privacy-Policy'> Read this app's Privacy Policy </a>";
+        String text = "By continuing to use this app, you are agreeing to the <a href='https://github.com/JPUF/SoulsBorneBossRanker/wiki/Privacy-Policy'>Privacy Policy</a>.";
         about9.setText(Html.fromHtml(text));
 
         realtimeTextView = (TextView) findViewById(R.id.database_tv);

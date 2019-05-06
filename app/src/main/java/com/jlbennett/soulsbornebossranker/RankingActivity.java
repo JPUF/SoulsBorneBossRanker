@@ -36,11 +36,11 @@ public class RankingActivity extends AppCompatActivity {
     Button personalButton;
     Button globalButton;
     ImageView arrow;
+    Typeface font;
 
     RecyclerView rankingRecycler;
     LinearLayoutManager llm;
 
-    Typeface font;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -116,7 +116,7 @@ public class RankingActivity extends AppCompatActivity {
     private void displayRankings(Ranking ranking) {
         int lightColor = Color.LTGRAY;
         int darkColor = Color.DKGRAY;
-        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/OptimusPrincepsSemiBold.ttf");
+
         if(ranking == Ranking.GLOBAL){
             populateTableFromFirebase();
             arrow.setRotation(180);
@@ -146,7 +146,7 @@ public class RankingActivity extends AppCompatActivity {
         rankingController.readAllBossesFromFirebase(new RankingController.DataStatus() {
             @Override
             public void DataIsLoaded(ArrayList<Boss> bosses) {
-                RankingRecyclerAdapter adapter = new RankingRecyclerAdapter(bosses);
+                RankingRecyclerAdapter adapter = new RankingRecyclerAdapter(bosses, font);
                 rankingRecycler.setAdapter(adapter);
             }
         });
@@ -157,7 +157,7 @@ public class RankingActivity extends AppCompatActivity {
     }
 
     public void populateTableFromList(List<Boss> bosses) {
-        RankingRecyclerAdapter adapter = new RankingRecyclerAdapter(bosses);
+        RankingRecyclerAdapter adapter = new RankingRecyclerAdapter(bosses, font);
         rankingRecycler.setAdapter(adapter);
     }
 

@@ -60,7 +60,6 @@ public class Contest {
     }
 
     private void scoreResultLocal() {
-        Log.i("startupDB", localDB.toString());
         LocalDatabase localDatabaseRef = localDB.get();//could try getting as a weak reference, pass that to Task.
         new LocalStorageTask().execute(localDatabaseRef, winnerOnline.id, loserOnline.id);//probs try catch.
     }
