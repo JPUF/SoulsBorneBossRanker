@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
                 android:fontFamily="@font/palanquin_dark_semibold"
-                android:text="The rankings are based off everybody's votes!"
+                android:text="The rankings are based on everybody's votes!"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
 
