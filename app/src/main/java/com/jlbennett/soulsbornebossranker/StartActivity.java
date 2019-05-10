@@ -22,8 +22,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StartActivity extends AppCompatActivity {
@@ -33,8 +35,6 @@ public class StartActivity extends AppCompatActivity {
     //TODO reduce minSdkVersion
     //TODO change disclaimer to TextView.
     //TODO taurus demon, Seath, Sanctuary Guardian, stray demon, Vendrick .Just check all the bosses
-    //TODO still crashing, null pointer stuff in Contest
-    //TODO Memory leaks caused by storing CONTEXT on background threads.
 
     BottomNavigationView navigation;
 
@@ -104,8 +104,10 @@ public class StartActivity extends AppCompatActivity {
                 setOnlineDBValues();
             }
         });
+
         setButton.setVisibility(View.GONE);
         realtimeTextView.setVisibility(View.GONE);
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -132,6 +134,7 @@ public class StartActivity extends AppCompatActivity {
         int startScore = 1000;
         Integer id = 1;
         Map<String, Boss> bosses = new HashMap<>();
+
         bosses.put((id).toString(), new Boss("Asylum Demon", id, "ds1", "asylumdemon.jpg", startScore));id++;
         bosses.put((id).toString(), new Boss("Bed of Chaos", id, "ds1", "bedofchaos.jpg", startScore));id++;
         bosses.put((id).toString(), new Boss("Bell Gargoyles", id, "ds1", "bellgargoyle.jpg", startScore));id++;
@@ -244,9 +247,22 @@ public class StartActivity extends AppCompatActivity {
         bosses.put((id).toString(), new Boss("Laurence, the First Vicar", id, "bb", "laurence.jpg", startScore));id++;
         bosses.put((id).toString(), new Boss("Living Failures", id, "bb", "failures.jpg", startScore));id++;
         bosses.put((id).toString(), new Boss("Lady Maria of the Astral Clocktower", id, "bb", "maria.jpg", startScore));id++;
-        bosses.put((id).toString(), new Boss("Orphan of Kos", id, "bb", "orphan.jpg", startScore));
+        bosses.put((id).toString(), new Boss("Orphan of Kos", id, "bb", "orphan.jpg", startScore)); id++;
+
+
+        bosses.put("111", new Boss("Seath the Scaleless", 111, "ds1", "seath.jpg", startScore));
+        bosses.put("112", new Boss("Taurus Demon", 112, "ds1", "taurusdemon.jpg", startScore));
+        bosses.put("113", new Boss("Stray Demon", 113, "ds1", "straydemon.jpg", startScore));
+        bosses.put("114", new Boss("Sanctuary Guardian", 114, "ds1", "sanctuaryguardian.jpg", startScore));
+        bosses.put("115", new Boss("Vendrick", 115, "ds2", "vendrick.jpg", startScore));
 
         mBossesRef.setValue(bosses);
+
+        List<Boss> localBosses = new ArrayList<>();
+        for(Integer i = 1; i <= id; i++) {
+            localBosses.add(bosses.get(i.toString()));
+        }
+        localDB.bossDao().insertAll(localBosses);
     }
 
     public void startVote() {

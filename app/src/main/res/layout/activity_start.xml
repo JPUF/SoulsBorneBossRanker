@@ -104,12 +104,17 @@
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/globe" />
 
-            <ImageView
-                android:id="@+id/about8"
+            <TextView
+                android:id="@+id/disclaimer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/disclaimer" />
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
+                android:fontFamily="@font/palanquin_dark_semibold"
+                android:lineSpacingExtra="-10sp"
+                android:text="Dislaimer: All content in this application is the intellectual property of FromSoftware and their publishers:\n\nDark Souls - Namco Bandai Games\nBloodborne - Sony Computer Entertainment"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/about9"

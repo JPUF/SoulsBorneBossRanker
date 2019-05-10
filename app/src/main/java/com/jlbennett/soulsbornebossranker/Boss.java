@@ -147,8 +147,15 @@ public class Boss {
         bosses.put((id).toString(), new Boss("Living Failures", id, "bb", "failures.jpg", startScore));id++;
         bosses.put((id).toString(), new Boss("Lady Maria of the Astral Clocktower", id, "bb", "maria.jpg", startScore));id++;
         bosses.put((id).toString(), new Boss("Orphan of Kos", id, "bb", "orphan.jpg", startScore));
+
+        bosses.put("111", new Boss("Seath the Scaleless", 111, "ds1", "seath.jpg", startScore));
+        bosses.put("112", new Boss("Taurus Demon", 112, "ds1", "taurusdemon.jpg", startScore));
+        bosses.put("113", new Boss("Stray Demon", 113, "ds1", "straydemon.jpg", startScore));
+        bosses.put("114", new Boss("Sanctuary Guardian", 114, "ds1", "sanctuaryguardian.jpg", startScore));
+        bosses.put("115", new Boss("Vendrick", 115, "ds2", "vendrick.jpg", startScore));
+
         List<Boss> localBosses = new ArrayList<>();
-        for(Integer i = 1; i <= id; i++) {
+        for(Integer i = 1; i <= 115; i++) {
             localBosses.add(bosses.get(i.toString()));
         }
         return localBosses;

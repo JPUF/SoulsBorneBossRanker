@@ -27,7 +27,7 @@ public class VoteController {
     public void readRandomBoss(final DataStatus dataStatus) {
         int randomBossID;
         do {
-            randomBossID = ThreadLocalRandom.current().nextInt(0, 110) + 1;
+            randomBossID = ThreadLocalRandom.current().nextInt(0, 115) + 1;
         } while(bossInUse == randomBossID);
         bossInUse = randomBossID;
         DatabaseReference bossRef = databaseRef.child("bosses/" + randomBossID);
